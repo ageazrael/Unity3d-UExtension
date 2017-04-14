@@ -1,0 +1,293 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000012246242656}
+  m_IsPrefabParent: 1
+--- !u!1 &1000011256896366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000013055059374}
+  m_Layer: 0
+  m_Name: PrefabL1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012246242656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000013792585196}
+  - component: {fileID: 114000013999722664}
+  m_Layer: 0
+  m_Name: PrefabAsset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013077539672
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000010784285562}
+  m_Layer: 0
+  m_Name: PrefabL2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013679446844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000011156824508}
+  m_Layer: 0
+  m_Name: PrefabL1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000014217543662
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000011005435744}
+  - component: {fileID: 114481727599071766}
+  m_Layer: 0
+  m_Name: PrefabL2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010784285562
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013077539672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4000013055059374}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4000011005435744
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014217543662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4000011156824508}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4000011156824508
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013679446844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4000011005435744}
+  m_Father: {fileID: 4000013792585196}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4000013055059374
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011256896366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4000010784285562}
+  m_Father: {fileID: 4000013792585196}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4000013792585196
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012246242656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4000011156824508}
+  - {fileID: 4000013055059374}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000013999722664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012246242656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c82d6e0ebca4aa48e08244ed03e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A:
+    AssetPath: Object/Rename_UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    LoadedAssetInstanceID: 0
+  Array:
+  - AssetPath: Object/Rename_UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: 
+    LoadedAssetInstanceID: 0
+  List:
+  - AssetPath: Object/Rename_UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: 
+    LoadedAssetInstanceID: 0
+  AClass:
+    Texture:
+      AssetPath: Object/Rename_UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/Rename_UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        LoadedAssetInstanceID: 0
+  ArrayClass:
+  - Texture:
+      AssetPath: Object/Rename_UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/Rename_UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: 
+        LoadedAssetInstanceID: 0
+  ListClass:
+  - Texture:
+      AssetPath: Object/Rename_UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/Rename_UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: 
+        LoadedAssetInstanceID: 0
+--- !u!114 &114481727599071766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014217543662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c82d6e0ebca4aa48e08244ed03e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A:
+    AssetPath: Object/UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    LoadedAssetInstanceID: 0
+  Array:
+  - AssetPath: Object/UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: 
+    LoadedAssetInstanceID: 0
+  List:
+  - AssetPath: Object/UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: 
+    LoadedAssetInstanceID: 0
+  - AssetPath: Object/UnitTest
+    AssetGUID: 219bede5a44314d45893c1c10a90882f
+    AssetTypeFullName: 
+    LoadedAssetInstanceID: 0
+  AClass:
+    Texture:
+      AssetPath: Object/UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        LoadedAssetInstanceID: 0
+  ArrayClass:
+  - Texture:
+      AssetPath: Object/UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: 
+        LoadedAssetInstanceID: 0
+  ListClass:
+  - Texture:
+      AssetPath: Object/UnitTest
+      AssetGUID: 219bede5a44314d45893c1c10a90882f
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    Next:
+      Next:
+        AssetPath: Object/UnitTest
+        AssetGUID: 219bede5a44314d45893c1c10a90882f
+        AssetTypeFullName: 
+        LoadedAssetInstanceID: 0
