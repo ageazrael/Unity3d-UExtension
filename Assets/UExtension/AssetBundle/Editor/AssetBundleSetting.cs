@@ -19,7 +19,7 @@ namespace UExtension
         [System.Serializable]
         public class SettingItem
         {
-            [Folder(FolderType.AssetPath)]
+            [Folder(PathType.AssetPath)]
             public string       SearchPath;
             public PackageType  PackageType;
             public string       SearchFilter;

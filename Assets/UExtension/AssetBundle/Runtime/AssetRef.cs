@@ -61,7 +61,7 @@ namespace UExtension
     [Serializable] public class RPhysicMaterial              : TAssetRef<PhysicMaterial> { }
     [Serializable] public class RPhysicsMaterial2D           : TAssetRef<PhysicsMaterial2D> { }
     [Serializable] public class RFont                        : TAssetRef<Font> { }
-
+    [Serializable] public class RAvatarMask                  : TAssetRef<AvatarMask>         { }
 
     [Serializable] public class RScriptableObject           : TAssetRef<ScriptableObject> { }
     [Serializable] public class RGameObject                 : TAssetRef<GameObject> { }

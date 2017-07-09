@@ -8,7 +8,6 @@ using System;
 /// </summary>
 namespace UExtension
 {
-    [Serializable] public class RAvatarMask         : TAssetRef<AvatarMask>         { }
     [Serializable] public class RAnimatorController : TAssetRef<AnimatorController> { }
     [Serializable] public class RSceneAsset         : TAssetRef<SceneAsset>         { }
     [Serializable] public class RLightingDataAssett : TAssetRef<LightingDataAsset>  { }

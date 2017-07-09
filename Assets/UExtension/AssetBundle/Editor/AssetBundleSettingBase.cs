@@ -9,7 +9,7 @@ namespace UExtension
     [TSIgnore]
 	public abstract class AssetBundleSettingBase : ScriptableObject
     {
-        [Folder(FolderType.ProjectPath)]
+        [Folder(PathType.ProjectPath)]
         public string                   ExportPath;
         public string                   Postfix;
 		[EnumMask]

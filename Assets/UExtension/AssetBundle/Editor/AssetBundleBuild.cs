@@ -88,7 +88,7 @@ namespace UExtension
             if (!rBuildSetting)
                 return;
 
-            var rExportPath = PathExtension.Combine(FolderAttribute.ProjectPathRoot,
+            var rExportPath = PathExtension.Combine(PathRoot.ProjectPathRoot,
 				rBuildSetting.ExportPath, BuildTargetPath.ToPath(rBuildTarget));
             if (!Directory.Exists(rExportPath))
                 Directory.CreateDirectory(rExportPath);

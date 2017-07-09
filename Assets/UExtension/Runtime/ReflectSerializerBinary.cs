@@ -277,7 +277,12 @@ namespace UExtension
                 break;
 
             case TypeCode.String:
-                rWriter.Write((string)rObject);
+                {
+                    var bValid = !string.IsNullOrEmpty((string)rObject);
+                    rWriter.Write(bValid);
+                    if (bValid)
+                        rWriter.Write((string)rObject);
+                }
                 break;
 
             default:
@@ -328,7 +333,13 @@ namespace UExtension
                 return rReader.ReadDecimal();
 
             case TypeCode.String:
-                return rReader.ReadString();
+                {
+                    var bValid = rReader.ReadBoolean();
+                    if (bValid)
+                        return rReader.ReadString();
+                    else
+                        return string.Empty;
+                }
 
             default:
                 return null;

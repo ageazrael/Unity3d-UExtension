@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.IO;
+using System;
 
 namespace UExtension
 {
@@ -50,6 +51,41 @@ namespace UExtension
             return Combine(Path.GetDirectoryName(rPath), Path.GetFileNameWithoutExtension(rPath));
         }
 
+		/// <summary>
+		/// 复制文件到指定位置
+		///     example:
+		///         Copy("/git/build/Gen/*.cs", "/git/build/tmp", true);
+		///         Copy("/git/build/Gen", "/git/build/tmp", true);
+		///         Copy("/git/build/Gen/asm.cs", "/git/build/tmp/asm.cs", true);
+		/// </summary>
+		public static void Copy(string source, string dest, bool overwrite)
+		{
+			if (File.Exists(source))
+			{
+				var rDirection = Path.GetDirectoryName(dest);
+				if (!Directory.Exists(rDirection))
+					Directory.CreateDirectory(rDirection);
 
+				File.Copy(source, dest, overwrite);
+			}
+			else
+			{
+				var rSearchPath = source;
+				var rSearchPattern = "*.*";
+				if (!Directory.Exists(source))
+				{
+					rSearchPath = Path.GetDirectoryName(source);
+					rSearchPattern = Path.GetFileName(source);
+
+					if (!Directory.Exists(rSearchPath))
+						throw new ArgumentException(string.Format("source:{0} in pair {1} invalid directory", source, rSearchPath));
+				}
+
+				foreach (var rFilePath in Directory.GetFiles(rSearchPath, rSearchPattern, SearchOption.AllDirectories))
+				{
+					Copy(rFilePath, rFilePath.Replace(rSearchPath, dest), overwrite);
+				}
+			}
+		}
 	}
 }
