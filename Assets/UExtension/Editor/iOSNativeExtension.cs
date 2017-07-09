@@ -26,13 +26,6 @@ namespace UExtension
 
     public static class iOSNativeExtension
     {
-        [MenuItem("UExtension/DoTest")]
-        public static void DoTest()
-        {
-            ProcessNativeExtension("/Users/ageazrael/Documents/Projects/Unity3d-UExtension/Build/DoTest");
-        }
-
-
         public static void ProcessNativeExtension(string path)
         {
             var rAssetGUIDs = AssetDatabase.FindAssets("t:iOSNativeExtensionSetting");
