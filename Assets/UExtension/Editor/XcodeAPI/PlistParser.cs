@@ -25,6 +25,81 @@ namespace UExtension.XcodeAPI
             get { return AsDict()[key]; }
             set { AsDict()[key] = value; }
         }
+
+
+        public void MergeFrom(PlistElement rElement)
+        {
+            if (this.GetType() != rElement.GetType())
+                return;
+
+			if (this is PlistElementDict)
+			{
+				var rDict = this as PlistElementDict;
+				var rElementDict = rElement as PlistElementDict;
+
+				foreach (var rElementPair in rElementDict.values)
+				{
+					var rDestValue = default(PlistElement);
+					if (!rDict.values.TryGetValue(rElementPair.Key, out rDestValue))
+					{
+                        rDestValue = CreateFromType(rElementPair.Value);
+                        rDict.values.Add(rElementPair.Key, rDestValue);
+
+                        rDestValue.MergeFrom(rElementPair.Value);
+					}
+				}
+			}
+            else if (this is PlistElementArray)
+            {
+                var rArray = this as PlistElementArray;
+                var rSourceArray = rElement as PlistElementArray;
+
+                foreach(var rElementValue in rSourceArray.values)
+                {
+                    var rNewElement = CreateFromType(rElementValue);
+                    rArray.values.Add(rNewElement);
+
+                    rNewElement.MergeFrom(rElementValue);
+                }
+            }
+            else if (this is PlistElementString)
+            {
+                var rString = this as PlistElementString;
+                var rSourceString = rElement as PlistElementString;
+
+                rString.value = rSourceString.value;
+            }
+            else if (this is PlistElementBoolean)
+			{
+				var rBoolean = this as PlistElementBoolean;
+				var rSourceBoolean = rElement as PlistElementBoolean;
+
+				rBoolean.value = rSourceBoolean.value;
+			}
+            else if (this is PlistElementInteger)
+			{
+				var rInteger = this as PlistElementInteger;
+				var rSourceInteger = rElement as PlistElementInteger;
+
+				rInteger.value = rSourceInteger.value;
+			}
+        }
+
+        protected PlistElement CreateFromType(PlistElement rElement)
+        {
+            if (rElement is PlistElementDict)
+                return new PlistElementDict();
+            else if (rElement is PlistElementArray)
+                return new PlistElementArray();
+            else if (rElement is PlistElementString)
+                return new PlistElementString(string.Empty);
+            else if (rElement is PlistElementBoolean)
+                return new PlistElementBoolean(false);
+            else if (rElement is PlistElementInteger)
+                return new PlistElementInteger(0);
+            else
+                return new PlistElement();
+        }
     }
 
     public class PlistElementString : PlistElement

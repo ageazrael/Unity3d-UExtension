@@ -58,7 +58,7 @@ namespace UExtension
 					yield return rWebRequest.Send();
 					try
 					{
-                        if (rWebRequest.isError || !string.IsNullOrEmpty(rWebRequest.error))
+                        if (rWebRequest.isNetworkError || !string.IsNullOrEmpty(rWebRequest.error))
 						{
 							Debug.LogErrorFormat("HTTPDownload: Download {0} save {1} errror => {2}",
 								rPair.Key, rPair.Value, rWebRequest.error);

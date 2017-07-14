@@ -12,11 +12,12 @@ Assets/UExtension.Exploration.meta
 Assets/UExtension.Example/
 Assets/UExtension.Example.meta
 
+
+Build/
 Library/
 obj/
 Temp/
 ProjectSettings/
-
-
-
-
+*.csproj
+*.userprefs
+*.sln
