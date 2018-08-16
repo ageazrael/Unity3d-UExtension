@@ -29,8 +29,14 @@ namespace UExtension
         
         public MonoCSC(TargetType rType, string rOutputFile)
         {
+#if UNITY_EDITOR_OSX
             this.Command          = "/bin/sh";
             this.Arguments        = string.Format("{0}/MonoBleedingEdge/bin/mcs", EditorApplication.applicationContentsPath);
+#else
+            this.Command          = "C:/Windows/System32/cmd.exe";
+            this.Arguments        = string.Format("/c {0}/MonoBleedingEdge/bin/mcs.bat", EditorApplication.applicationContentsPath);
+#endif
+
             this.BuildTargetType  = rType;
             this.OutputFile       = rOutputFile;
             this.WorkingDirectory = Application.dataPath + "/../";

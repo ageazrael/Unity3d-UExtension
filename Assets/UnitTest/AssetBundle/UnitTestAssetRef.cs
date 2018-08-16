@@ -4,10 +4,6 @@ using UExtension;
 
 namespace UnitTest
 {
-    [System.Serializable]
-    public class EventX : UnityEngine.Events.UnityEvent<string, int, int>
-    {
-    }
     public class UnitTestAssetRef : MonoBehaviour
     {
         public RObject      RefObject;
@@ -19,16 +15,11 @@ namespace UnitTest
 
         public RSprite      LoadAssetRef;
 
-
-        public EventX       What;
-
-
-        public void Print(string v1, int v2, int v3)
+        private void Awake()
         {
+            AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath("UnitTestAssetBundle");
         }
-        public void EXD(string v1)
-        {
-        }
+
 
         [ContextMenu("Begin load")]
         void MCLoadAssetRef()

@@ -24,47 +24,38 @@ namespace UExtension
 		public delegate void DelegateDownloadState(string rFilename, State rState, int nIndex, int nTotal);
 		public delegate void DelegateDownloadCompleted();
 
-		public DelegateDownloadState 		OnDownloadStateChange;
-		public DelegateDownloadCompleted	OnDownloadCompleted;
+		public static Coroutine Start(List<KeyValuePair<string, string>> rDownloadList,
+            DelegateDownloadCompleted rDownloadCompleted = null,
+            DelegateDownloadState rDownloadState = null) => CoroutineManager.Start(HandleStart(rDownloadList, rDownloadCompleted, rDownloadState));
 
-		public static Coroutine StaticStart(List<KeyValuePair<string, string>> rDownloadList, 
-			DelegateDownloadCompleted rDownloadCompleted = null, DelegateDownloadState rDownloadState = null)
-		{
-			var rHTTPDownload = new HTTPDownload();
-			rHTTPDownload.OnDownloadStateChange = rDownloadState;
-			rHTTPDownload.OnDownloadCompleted   = rDownloadCompleted;
-			return CoroutineManager.Start(rHTTPDownload.HandleStart(rDownloadList));
-		}
-
-		public Coroutine Start(List<KeyValuePair<string, string>> rDownloadList)
-		{
-			return CoroutineManager.Start(this.HandleStart(rDownloadList));
-		}
-		
-		protected IEnumerator HandleStart(List<KeyValuePair<string, string>> rDownloadList)
+        public static IEnumerator HandleStart(List<KeyValuePair<string, string>> rDownloadList,
+            DelegateDownloadCompleted rDownloadCompleted = null,
+            DelegateDownloadState rDownloadState = null)
 		{
 			if (null == rDownloadList)
-				yield break;
+            {
+                Debug.LogErrorFormat("HTTPDownload: DownloadList is null!!!");
+                rDownloadCompleted?.Invoke();
+                yield break;
+            }
 
 			for (int nIndex = 0; nIndex < rDownloadList.Count; ++ nIndex)
 			{
 				var rPair = rDownloadList[nIndex];
 
-				if (null != this.OnDownloadStateChange)
-					this.OnDownloadStateChange(rPair.Value, State.Downloading, nIndex + 1, rDownloadList.Count);
-				using(var rWebRequest = new UnityWebRequest(rPair.Key, 
+                rDownloadState?.Invoke(rPair.Value, State.Downloading, nIndex + 1, rDownloadList.Count);
+                using (var rWebRequest = new UnityWebRequest(rPair.Key, 
 					UnityWebRequest.kHttpVerbGET, new DownloadHandlerBuffer(), null))
 				{
-					yield return rWebRequest.Send();
+					yield return rWebRequest.SendWebRequest();
 					try
 					{
                         if (rWebRequest.isNetworkError || !string.IsNullOrEmpty(rWebRequest.error))
 						{
 							Debug.LogErrorFormat("HTTPDownload: Download {0} save {1} errror => {2}",
 								rPair.Key, rPair.Value, rWebRequest.error);
-							if (null != this.OnDownloadStateChange)
-								this.OnDownloadStateChange(rPair.Value, State.Error, nIndex + 1, rDownloadList.Count);
-						}
+                            rDownloadState?.Invoke(rPair.Value, State.Error, nIndex + 1, rDownloadList.Count);
+                        }
 						else
 						{
 							var rDirectoryName = Path.GetDirectoryName(rPair.Value);
@@ -72,24 +63,21 @@ namespace UExtension
 								Directory.CreateDirectory(rDirectoryName);
 							
 							File.WriteAllBytes(rPair.Value, rWebRequest.downloadHandler.data);
-					
-							if (null != this.OnDownloadStateChange)
-								this.OnDownloadStateChange(rPair.Value, State.Completed, nIndex + 1, rDownloadList.Count);
-						}
+
+                            rDownloadState?.Invoke(rPair.Value, State.Completed, nIndex + 1, rDownloadList.Count);
+                        }
 					}
 					catch (Exception rException)
 					{
 						Debug.LogException(rException);
 						Debug.LogErrorFormat("HTTPDownload: Download {0} save {1} errror => {2}",
 							rPair.Key, rPair.Value, rException.Message);
-						if (null != this.OnDownloadStateChange)
-							this.OnDownloadStateChange(rPair.Value, State.Error, nIndex + 1, rDownloadList.Count);
-					}
+                        rDownloadState?.Invoke(rPair.Value, State.Error, nIndex + 1, rDownloadList.Count);
+                    }
 				}
 			}
 
-			if (null != this.OnDownloadCompleted)
-				this.OnDownloadCompleted();
-		}
+            rDownloadCompleted?.Invoke();
+        }
 	}
 }

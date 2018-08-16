@@ -20,9 +20,6 @@ namespace UnitTest
 		bool 		 downloading;
 		void Start ()
 		{
-			download = new HTTPDownload();
-			download.OnDownloadStateChange 	+= this.OnDownloadStateChange;
-			download.OnDownloadCompleted 	+= this.OnDownloadCompleted;
 		}
 
 		void OnGUI()
@@ -40,7 +37,7 @@ namespace UnitTest
 
 		IEnumerator HandleDownload(List<KeyValuePair<string, string>> rDownloadList)
 		{
-			yield return download.Start(rDownloadList);
+			yield return HTTPDownload.Start(rDownloadList, this.OnDownloadCompleted, this.OnDownloadStateChange);
 
 			Debug.Log("Download Wait Completed");
 		}

@@ -28,25 +28,11 @@ namespace UExtension
 				case RuntimePlatform.tvOS:
 					return "tvOS";
 
-				case RuntimePlatform.SamsungTVPlayer:
-					return "SamsungTV";
-
-					//case RuntimePlatform.Nintendo3DS?
-
-				//case RuntimePlatform.PS3:
-				//	return "PS3";
-
 				case RuntimePlatform.PS4:
 					return "PS4";
 
-				case RuntimePlatform.PSM:
-					return "PSM";
-
 				case RuntimePlatform.PSP2:
 					return "PSP2";
-
-				//case RuntimePlatform.XBOX360:
-				//	return "XBOX360";
 
 				case RuntimePlatform.XboxOne:
 					return "XboxOne";
@@ -59,14 +45,8 @@ namespace UExtension
 				case RuntimePlatform.WindowsPlayer:
 					return "Windows";
 
-				case RuntimePlatform.TizenPlayer:
-					return "Tizen";
-
 				case RuntimePlatform.WebGLPlayer:
 					return "WebGL";
-
-				case RuntimePlatform.WiiU:
-					return "WiiU";
 
 				case RuntimePlatform.WSAPlayerARM:
 				case RuntimePlatform.WSAPlayerX64:
@@ -236,17 +216,34 @@ namespace UExtension
 
             if (!rAssetBundleRef.Bundle)
             {
-                var www = new WWW(rAssetBundleRef.BundleURL);
-                yield return www;
-
-                if (!string.IsNullOrEmpty(www.error))
+                if (!string.IsNullOrEmpty(rAssetBundleRef.BundleURL))
                 {
-                    Debug.LogError(www.error);
-					rRequest.LoadCompleted();
-                    yield break; // TODO: load assetbundle failed!
-                }
+                    var www = new WWW(rAssetBundleRef.BundleURL);
+                    yield return www;
 
-                rAssetBundleRef.Bundle = www.assetBundle;
+                    if (!string.IsNullOrEmpty(www.error))
+                    {
+                        Debug.LogError(www.error);
+                        rRequest.LoadCompleted();
+                        yield break; // TODO: load assetbundle failed!
+                    }
+
+                    rAssetBundleRef.Bundle = www.assetBundle;
+                }
+                else if (!string.IsNullOrEmpty(rAssetBundleRef.BundleFilePath))
+                {
+                    var rLoader = AssetBundle.LoadFromFileAsync(rAssetBundleRef.BundleFilePath);
+                    yield return rLoader;
+
+                    rAssetBundleRef.Bundle = rLoader.assetBundle;
+                }
+                else
+                {
+                    Debug.LogErrorFormat("AssetBundle({0}) invalid URL/FilePath", rAssetBundleName);
+                    rRequest.LoadCompleted();
+                    yield break;
+                }
+                
                 foreach(var rDependName in rAssetBundleRef.BundleDepend)
                     yield return CoroutineManager.Start(this.CacheBundleDependByWWW(rDependName));
 

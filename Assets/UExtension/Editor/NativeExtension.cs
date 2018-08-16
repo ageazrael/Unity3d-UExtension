@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEditor;
 
 using System.IO;
@@ -8,19 +9,19 @@ using UExtension.XcodeAPI;
 
 namespace UExtension
 {
-    public class ProcessNativeExtension : IPostprocessBuild
+    public class ProcessNativeExtension : IPostprocessBuildWithReport
     {
         int IOrderedCallback.callbackOrder
         {
             get { return 0; }
         }
 
-        void IPostprocessBuild.OnPostprocessBuild(BuildTarget target, string path)
+        void IPostprocessBuildWithReport.OnPostprocessBuild(BuildReport report)
         {
-            if (target != BuildTarget.iOS)
+            if (report.summary.platform != BuildTarget.iOS)
                 return;
 
-            NativeExtension.ProcessNativeExtension(path);
+            NativeExtension.ProcessNativeExtension(report.summary.outputPath);
         }
     }
 

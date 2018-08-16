@@ -60,9 +60,9 @@ namespace UExtension
         void AddAssetBundleBuild(List<AssetBundleBuild> rBuildList, SettingItem rItem)
         {
             if (rItem.PackageType == PackageType.Object)
-                AddAssetBundleBuildObject(rBuildList, rItem.SearchFilter, "Assets" + rItem.SearchPath, rItem.OutputPath);
+                AddAssetBundleBuildObject(rBuildList, rItem.SearchFilter, PathExtension.Combine("Assets", rItem.SearchPath), rItem.OutputPath);
             else if (rItem.PackageType == PackageType.Folder)
-                AddAssetBundleBuildFolder(rBuildList, rItem.SearchFilter, "Assets" + rItem.SearchPath, rItem.OutputPath);
+                AddAssetBundleBuildFolder(rBuildList, rItem.SearchFilter, PathExtension.Combine("Assets", rItem.SearchPath), rItem.OutputPath);
         }
         void AddAssetBundleBuildObject(List<AssetBundleBuild> rBuildList, string rSearchFilter, string rSearchPath, string rOutputPath)
         {

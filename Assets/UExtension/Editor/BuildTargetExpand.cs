@@ -11,9 +11,9 @@ namespace UExtension
         {
             switch (rBuildTarget)
             {
-                case BuildTarget.StandaloneOSXIntel:
-                case BuildTarget.StandaloneOSXIntel64:
-                case BuildTarget.StandaloneOSXUniversal:
+                //case BuildTarget.StandaloneOSXIntel:
+                //case BuildTarget.StandaloneOSXIntel64:
+                case BuildTarget.StandaloneOSX:
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
                 case BuildTarget.StandaloneLinux:

@@ -27,47 +27,24 @@ namespace UExtension
 			case BuildTarget.tvOS:
 				return "tvOS";
 
-			case BuildTarget.SamsungTV:
-				return "SamsungTV";
-
-			//case BuildTarget.Nintendo3DS:
-			//	return "Nintendo3DS";
-
-			//case BuildTarget.PS3:
-			//	return "PS3";
-
 			case BuildTarget.PS4:
 				return "PS4";
-
-			case BuildTarget.PSM:
-				return "PSM";
 
 			case BuildTarget.PSP2:
 				return "PSP2";
 
-			//case BuildTarget.XBOX360:
-			//	return "XBOX360";
-
 			case BuildTarget.XboxOne:
 				return "XboxOne";
 
-			case BuildTarget.StandaloneOSXIntel:
-			case BuildTarget.StandaloneOSXIntel64:
-			case BuildTarget.StandaloneOSXUniversal:
+			case BuildTarget.StandaloneOSX:
 				return "OSX";
 
 			case BuildTarget.StandaloneWindows:
 			case BuildTarget.StandaloneWindows64:
 				return "Windows";
 
-			case BuildTarget.Tizen:
-				return "Tizen";
-
 			case BuildTarget.WebGL:
 				return "WebGL";
-
-			case BuildTarget.WiiU:
-				return "WiiU";
 
 			case BuildTarget.WSAPlayer:
 				return "WSA";
