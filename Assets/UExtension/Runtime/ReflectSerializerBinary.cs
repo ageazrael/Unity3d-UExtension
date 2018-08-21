@@ -66,8 +66,8 @@ namespace UExtension
             var rMemberInfos = SerializerBinaryUtility.SearchSerializeMember(rObject.GetType(), true);
             foreach (var rMemberInfo in rMemberInfos)
             {
-                var rMemberType  = GetMemberDataType(rMemberInfo);
-                var rMemberValue = GetMemberDataValue(rMemberInfo, rObject);
+                var rMemberType  = rMemberInfo.GetMemberDataType();
+                var rMemberValue = rMemberInfo.GetMemberDataValue<object>(rObject);
                 if (null == rMemberType)
                     continue;
                 
@@ -90,7 +90,7 @@ namespace UExtension
             var rMemberInfos = SerializerBinaryUtility.SearchSerializeMember(rType, true);
             foreach(var rMemberInfo in rMemberInfos)
             {
-                var rMemberType = GetMemberDataType(rMemberInfo);
+                var rMemberType = rMemberInfo.GetMemberDataType();
                 if (null == rMemberType)
                     continue;
                 if (rMemberInfo.IsApplyAttr<SBDynamicAttribute>(false))
@@ -98,7 +98,7 @@ namespace UExtension
                 if (null == rMemberType)
                     continue; // TODO: 找不到这个类型啊！！应该会影响程序接下来的运行的。
 
-                SetMemberDataValue(rMemberInfo, rClassObject, Deserialize(null, rMemberType, rReader));
+                rMemberInfo.SetMemberDataValue(rClassObject, Deserialize(null, rMemberType, rReader));
             }
             
             return rClassObject;
@@ -192,32 +192,6 @@ namespace UExtension
                 rDictionaryObject.Add(rKey, rValue);
             }
             return rDictionaryObject;
-        }
-
-        static Type GetMemberDataType(MemberInfo rMemberInfo)
-        {
-            if (rMemberInfo.MemberType == MemberTypes.Field)
-                return (rMemberInfo as FieldInfo).FieldType;
-            else if (rMemberInfo.MemberType == MemberTypes.Property)
-                return (rMemberInfo as PropertyInfo).PropertyType;
-            else
-                return null;
-        }
-        static object GetMemberDataValue(MemberInfo rMemberInfo, object rObject)
-        {
-            if (rMemberInfo.MemberType == MemberTypes.Field)
-                return (rMemberInfo as FieldInfo).GetValue(rObject);
-            else if (rMemberInfo.MemberType == MemberTypes.Property)
-                return (rMemberInfo as PropertyInfo).GetValue(rObject, null);
-            else
-                return null;
-        }
-        static void SetMemberDataValue(MemberInfo rMemberInfo, object rObject, object rValue)
-        {
-            if (rMemberInfo.MemberType == MemberTypes.Field)
-                (rMemberInfo as FieldInfo).SetValue(rObject, rValue);
-            else if (rMemberInfo.MemberType == MemberTypes.Property)
-                (rMemberInfo as PropertyInfo).SetValue(rObject, rValue, null);
         }
         static void WritePrimitive(Type rType, object rObject, BinaryWriter rWriter)
         {

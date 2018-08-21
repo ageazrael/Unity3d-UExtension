@@ -19,6 +19,13 @@ namespace UExtension
             EditorGUI.LabelField(position, text.ToString());
             Debug.LogError(text.ToString(), property.serializedObject.targetObject);
         }
+        protected void PropertyDrawerError(Rect position, SerializedProperty property, string format, params object[] args)
+        {
+            var text = new StringBuilder();
+            text.AppendFormat("property {0} use {1} attribute error: {2}", property.name, this.attribute.GetType().Name, string.Format(format, args));
+            EditorGUI.LabelField(position, text.ToString());
+            Debug.LogError(text.ToString(), property.serializedObject.targetObject);
+        }
         protected T GetBaseProperty<T>(SerializedProperty prop)
         {
             // Separate the steps it takes to get to this property

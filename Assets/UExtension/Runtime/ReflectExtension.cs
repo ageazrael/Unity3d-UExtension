@@ -27,6 +27,31 @@ namespace UExtension
         {
             return (T)Construct(rType, args);
         }
+        public static Type GetMemberDataType(this MemberInfo rMemberInfo)
+        {
+            if (rMemberInfo.MemberType == MemberTypes.Field)
+                return (rMemberInfo as FieldInfo).FieldType;
+            else if (rMemberInfo.MemberType == MemberTypes.Property)
+                return (rMemberInfo as PropertyInfo).PropertyType;
+            else
+                return null;
+        }
+        public static T GetMemberDataValue<T>(this MemberInfo rMemberInfo, object rObject)
+        {
+            if (rMemberInfo.MemberType == MemberTypes.Field)
+                return (T)(rMemberInfo as FieldInfo).GetValue(rObject);
+            else if (rMemberInfo.MemberType == MemberTypes.Property)
+                return (T)(rMemberInfo as PropertyInfo).GetValue(rObject, null);
+            else
+                return default(T);
+        }
+        public static void SetMemberDataValue<T>(this MemberInfo rMemberInfo, object rObject, T rValue)
+        {
+            if (rMemberInfo.MemberType == MemberTypes.Field)
+                (rMemberInfo as FieldInfo).SetValue(rObject, rValue);
+            else if (rMemberInfo.MemberType == MemberTypes.Property)
+                (rMemberInfo as PropertyInfo).SetValue(rObject, rValue, null);
+        }
     }
 
     public static class ICustomAttributeProviderExpand

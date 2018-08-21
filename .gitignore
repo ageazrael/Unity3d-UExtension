@@ -12,6 +12,10 @@ Assets/UExtension.Exploration.meta
 Assets/UExtension.Example/
 Assets/UExtension.Example.meta
 
+UnitTestAssetBundle/
+Packages/
+.vs/
+
 
 Build/
 Library/
