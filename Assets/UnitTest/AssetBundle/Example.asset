@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b9c4ec3b323df4fa5033cfa5285d48, type: 3}
   m_Name: Example
   m_EditorClassIdentifier: 
-  ExportPath: /UnitTestAssetBundle
+  ExportPath: AssetBundle/UnitTestAssetBundle
   Postfix: bundle
   BuildOptions: 256
   ExcludeInPlayer: 1

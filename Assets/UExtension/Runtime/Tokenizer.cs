@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace UExtension
+﻿namespace UExtension
 {
     public enum TokenType
     {
@@ -31,10 +27,7 @@ namespace UExtension
         public int          EndIndex    = InvalidIndex;
         public string       SourceText;
 
-        public string Text
-        {
-            get { return Valid ? SourceText.Substring(StartIndex, EndIndex - StartIndex + 1) : string.Empty; }
-        }
+        public string Text => Valid ? SourceText.Substring(StartIndex, EndIndex - StartIndex + 1) : string.Empty;
         public bool Valid
         {
             get
@@ -73,12 +66,11 @@ namespace UExtension
 
         public Token NextToken()
         {
-            var rToken = new Token();
-
-            // Init
-            rToken.Type         = TokenType.Unknown;
-            rToken.SourceText   = mSourceText;
-            rToken.EndIndex     = mSourceText.Length - 1;
+            var rToken = new Token() {
+                Type = TokenType.Unknown,
+                SourceText = mSourceText,
+                EndIndex = mSourceText.Length - 1
+            };
 
             var bTokening = this.IsValid();
             while (bTokening)

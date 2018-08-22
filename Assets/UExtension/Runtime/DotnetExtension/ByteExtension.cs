@@ -25,7 +25,7 @@ namespace UExtension
             return rText.ToString();
         }
 
-        #if _USE_UNSAFE
+        #if _ALLOW_UNSAFE
         public static unsafe bool Write(this byte[] rBytes, int nStartIndex, byte value)
         {
             return Write(rBytes, nStartIndex, &value, sizeof(byte));

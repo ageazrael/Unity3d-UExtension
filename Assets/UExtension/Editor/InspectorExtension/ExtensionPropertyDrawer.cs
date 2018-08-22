@@ -28,18 +28,36 @@ namespace UExtension
         }
         protected T GetBaseProperty<T>(SerializedProperty prop)
         {
+            return (T)this.GetBaseProperty(prop.serializedObject.targetObject, prop.propertyPath);
+        }
+        protected object GetBaseProperty(object rReflectionTarget, string rPropertyPath)
+        {
             // Separate the steps it takes to get to this property
-            string[] separatedPaths = prop.propertyPath.Split('.');
+            string[] rSeparatedPaths = rPropertyPath.Split('.');
 
             // Go down to the root of this serialized property
-            System.Object reflectionTarget = prop.serializedObject.targetObject as object;
             // Walk down the path to get the target object
-            foreach (var path in separatedPaths)
+            foreach (var rPath in rSeparatedPaths)
             {
-                var fieldInfo = reflectionTarget.GetType().GetField(path);
-                reflectionTarget = fieldInfo.GetValue(reflectionTarget);
+                if (string.IsNullOrEmpty(rPath) || rPath == "Array")
+                    continue;
+
+                if (typeof(System.Array).IsAssignableFrom(rReflectionTarget.GetType()))
+                {
+                    var nStartIndex = rPath.IndexOf('[');
+                    var nEndIndex = rPath.LastIndexOf(']');
+                    var nDataIndex = int.Parse(rPath.Substring(nStartIndex + 1, nEndIndex - nStartIndex - 1));
+
+                    rReflectionTarget = ((System.Array)rReflectionTarget).GetValue(nDataIndex);
+                }
+                else
+                {
+                    var rFieldInfo = rReflectionTarget.GetType().GetField(rPath);
+                    rReflectionTarget = rFieldInfo.GetValue(rReflectionTarget);
+                }
+                
             }
-            return (T)reflectionTarget;
+            return rReflectionTarget;
         }
     }
 

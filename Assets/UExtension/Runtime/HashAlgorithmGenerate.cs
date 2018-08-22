@@ -16,10 +16,7 @@ namespace UExtension
             return rHashAlgorithm.Hash.ToHEXString();
         }
 
-        public static string ByFile(string rHashName, params string[] rFilenames)
-        {
-            return ByFile(rHashName, 1024, rFilenames);
-        }
+        public static string ByFile(string rHashName, params string[] rFilenames) => ByFile(rHashName, 1024, rFilenames);
 
         public static string ByFile(string rHashName, int nBufferSize, params string[] rFilenames)
         {

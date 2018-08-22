@@ -12,25 +12,6 @@ namespace UExtension
 
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class TSIgnoreInheritedAttribute : TSIgnoreAttribute {}
-
-	[AttributeUsage(AttributeTargets.Field)]
-	public class TypeSearchAttribute : PropertyAttribute
-	{
-		public Type TypeSearchType;
-		
-		public TypeSearchAttribute(Type rTypeSearch)
-		{
-			TypeSearchType = rTypeSearch;
-		}
-
-        public List<string> TypeFullNames
-        {
-            get
-            {
-                return TypeSearchBase.GetTypeFullNames(TypeSearchType);
-            }
-        }
-	}
     /// <summary>
     /// TypeSearchCore
     /// </summary>

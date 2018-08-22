@@ -52,19 +52,19 @@ namespace UExtension
     /// </summary>
     public static class ValueTypeSerialize
     {
-        public static void Serialize(this BinaryWriter rWriter, char value)     { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, byte value)     { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, sbyte value)    { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, bool value)     { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, short value)    { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, ushort value)   { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, int value)      { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, uint value)     { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, long value)     { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, ulong value)    { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, float value)    { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, double value)   { rWriter.Write(value); }
-        public static void Serialize(this BinaryWriter rWriter, decimal value)  { rWriter.Write(value); }
+        public static void Serialize(this BinaryWriter rWriter, char value)     => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, byte value)     => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, sbyte value)    => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, bool value)     => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, short value)    => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, ushort value)   => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, int value)      => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, uint value)     => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, long value)     => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, ulong value)    => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, float value)    => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, double value)   => rWriter.Write(value);
+        public static void Serialize(this BinaryWriter rWriter, decimal value)  => rWriter.Write(value);
         public static void Serialize(this BinaryWriter rWriter, string value)
         {
             bool bValid = !string.IsNullOrEmpty(value);
@@ -78,19 +78,19 @@ namespace UExtension
     /// </summary>
     public static class ValueTypeDeserialize
     {
-        public static char      Deserialize(this BinaryReader rReader, char value)    { return rReader.ReadChar();    }
-        public static byte      Deserialize(this BinaryReader rReader, byte value)    { return rReader.ReadByte();    }
-        public static sbyte     Deserialize(this BinaryReader rReader, sbyte value)   { return rReader.ReadSByte();   }
-        public static bool      Deserialize(this BinaryReader rReader, bool value)    { return rReader.ReadBoolean(); }
-        public static short     Deserialize(this BinaryReader rReader, short value)   { return rReader.ReadInt16();   }
-        public static ushort    Deserialize(this BinaryReader rReader, ushort value)  { return rReader.ReadUInt16();  }
-        public static int       Deserialize(this BinaryReader rReader, int value)     { return rReader.ReadInt32();   }
-        public static uint      Deserialize(this BinaryReader rReader, uint value)    { return rReader.ReadUInt32();  }
-        public static long      Deserialize(this BinaryReader rReader, long value)    { return rReader.ReadInt64();   }
-        public static ulong     Deserialize(this BinaryReader rReader, ulong value)   { return rReader.ReadUInt64();  }
-        public static float     Deserialize(this BinaryReader rReader, float value)   { return rReader.ReadSingle();  }
-        public static double    Deserialize(this BinaryReader rReader, double value)  { return rReader.ReadDouble();  }
-        public static decimal   Deserialize(this BinaryReader rReader, decimal value) { return rReader.ReadDecimal(); }
+        public static char      Deserialize(this BinaryReader rReader, char value)    => rReader.ReadChar();
+        public static byte      Deserialize(this BinaryReader rReader, byte value)    => rReader.ReadByte();
+        public static sbyte     Deserialize(this BinaryReader rReader, sbyte value)   => rReader.ReadSByte();
+        public static bool      Deserialize(this BinaryReader rReader, bool value)    => rReader.ReadBoolean();
+        public static short     Deserialize(this BinaryReader rReader, short value)   => rReader.ReadInt16();
+        public static ushort    Deserialize(this BinaryReader rReader, ushort value)  => rReader.ReadUInt16();
+        public static int       Deserialize(this BinaryReader rReader, int value)     => rReader.ReadInt32();
+        public static uint      Deserialize(this BinaryReader rReader, uint value)    => rReader.ReadUInt32();
+        public static long      Deserialize(this BinaryReader rReader, long value)    => rReader.ReadInt64();
+        public static ulong     Deserialize(this BinaryReader rReader, ulong value)   => rReader.ReadUInt64();
+        public static float     Deserialize(this BinaryReader rReader, float value)   => rReader.ReadSingle();
+        public static double    Deserialize(this BinaryReader rReader, double value)  => rReader.ReadDouble();
+        public static decimal   Deserialize(this BinaryReader rReader, decimal value) => rReader.ReadDecimal();
         public static string    Deserialize(this BinaryReader rReader, string value)
         {
             bool bValid = rReader.ReadBoolean();
@@ -158,14 +158,8 @@ namespace UExtension
     public partial class SerializerBinaryArchive<T> : SerializerBinary
         where T : SerializerBinary
     {
-        public static T LoadArchive(string rFilePath)
-        {
-            return ReflectExtension.Construct<T>().LoadArchive(rFilePath);
-        }
-        public static T LoadArchiveByURL(string rURL)
-        {
-            return ReflectExtension.Construct<T>().LoadArchiveByURL(rURL);
-        }
+        public static T LoadArchive(string rFilePath) => ReflectExtension.Construct<T>().LoadArchive(rFilePath);
+        public static T LoadArchiveByURL(string rURL) => ReflectExtension.Construct<T>().LoadArchiveByURL(rURL);
     }
 
 
@@ -205,9 +199,7 @@ namespace UExtension
         }
         public static Coroutine LoadArchiveByWWW<T>(this T rSerializerBinary, string rURL, Action rCompleted = null)
             where T : SerializerBinary
-        {
-            return CoroutineManager.Start(HandleLoadArchiveByWWW(rSerializerBinary, rURL, rCompleted));
-        }
+            => CoroutineManager.Start(HandleLoadArchiveByWWW(rSerializerBinary, rURL, rCompleted));
         private static IEnumerator HandleLoadArchiveByWWW<T>(this T rSerializerBinary, string rURL, Action rCompleted)
             where T : SerializerBinary
         {

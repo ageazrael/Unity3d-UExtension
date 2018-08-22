@@ -159,8 +159,16 @@ namespace UExtension
                 return;
             }
 
+            var rPropertyPath = property.propertyPath;
+            if (rPropertyPath.Contains("." + property.name))
+                rPropertyPath = rPropertyPath.Replace("." + property.name, string.Empty);
+            else if (rPropertyPath == property.name)
+                rPropertyPath = "";
+
+            var rTargetObject = this.GetBaseProperty(property.serializedObject.targetObject, rPropertyPath);
+
             var nBindingFlags = BindingFlags.Instance|BindingFlags.Static|BindingFlags.GetField|BindingFlags.GetProperty|BindingFlags.NonPublic|BindingFlags.Public;
-            var rMemberInfoes = property.serializedObject.targetObject.GetType().GetMember(rAttribute.MappingValueName, nBindingFlags);
+            var rMemberInfoes = rTargetObject.GetType().GetMember(rAttribute.MappingValueName, nBindingFlags);
             var rFindMemberInfo = default(MemberInfo);
             foreach (var rInfo in rMemberInfoes)
             {
@@ -202,7 +210,7 @@ namespace UExtension
                 return;
             }
 
-            var rMappingDict = rFindMemberInfo.GetMemberDataValue<IDictionary>(property.serializedObject);
+            var rMappingDict = rFindMemberInfo.GetMemberDataValue<IDictionary>(rTargetObject);
             var rKeys = new string[rMappingDict.Count];
             var rValues = new object[rMappingDict.Count];
             var nIndex = 0;

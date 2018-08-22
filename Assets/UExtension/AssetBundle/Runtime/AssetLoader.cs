@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 
@@ -11,17 +12,15 @@ namespace UExtension
     /// </summary>
     public class AssetLoaderRequest : CustomYieldInstruction
     {
-        public Object Asset
-        {
-            get { return Assets[0]; }
-        }
+        public Object Asset => this.Assets[0];
         public Object[] Assets;
 
-        public override bool keepWaiting
-        {
-            get { return !IsDone; }
-        }
+        public override bool keepWaiting => !this.IsDone;
         public bool IsDone;
+
+        public bool IsAsset = true;
+        public LoadSceneMode SceneMode;
+        public bool IsActiveScene = false;
 
         public event Action<AssetLoaderRequest> OnLoadCompleted;
 
@@ -39,10 +38,7 @@ namespace UExtension
     public class TAssetLoaderRequest<T> : AssetLoaderRequest
         where T : UnityEngine.Object
     {
-        public new T Asset
-        {
-            get { return Assets[0] ? (Assets[0] as T) : default(T); }
-        }
+        public new T Asset => Assets[0] ? (Assets[0] as T) : default(T);
     }
 
     /// <summary>
@@ -65,6 +61,13 @@ namespace UExtension
             else
                 return LoadInResourceAsync<T>(rAssetPath);
         }
+        public static AssetLoaderRequest LoadSceneAsync(string rSceneName, LoadSceneMode rSceneMode, bool bIsActiveScene = false)
+        {
+            if (AssetBundleLoader.Instance.ContainsAsset(rSceneName))
+                return AssetBundleLoader.Instance.LoadSceneAsync(rSceneName, rSceneMode, bIsActiveScene);
+            else
+                return LoadInSceneAsync(rSceneName, rSceneMode, bIsActiveScene);
+        }
         public static Object LoadAsset(string rAssetPath, System.Type rAssetType)
         {
             if (AssetBundleLoader.Instance.ContainsAsset(rAssetPath))
@@ -79,6 +82,12 @@ namespace UExtension
             CoroutineManager.Start(HandleLoadInResourceAsync(rAssetPath, rAssetType, rRequest));
             return rRequest;
         }
+        static AssetLoaderRequest LoadInSceneAsync(string rSceneName, LoadSceneMode rSceneMode, bool bIsActiveScene)
+        {
+            var rRequest = new AssetLoaderRequest() { IsAsset = false, SceneMode = rSceneMode, IsActiveScene = bIsActiveScene };
+            CoroutineManager.Start(HandleLoadInResourceAsync(rSceneName, typeof(Object), rRequest));
+            return rRequest;
+        }
         static TAssetLoaderRequest<T> LoadInResourceAsync<T>(string rAssetPath)
             where T : UnityEngine.Object
         {
@@ -88,10 +97,21 @@ namespace UExtension
         }
         static IEnumerator HandleLoadInResourceAsync(string rAssetPath, System.Type rAssetType, AssetLoaderRequest rRequest)
         {
-            var rLoadAsyncRequest = Resources.LoadAsync(rAssetPath, rAssetType);
-            yield return rLoadAsyncRequest;
+            if (rRequest.IsAsset)
+            {
+                var rLoadAsyncRequest = Resources.LoadAsync(rAssetPath, rAssetType);
+                yield return rLoadAsyncRequest;
 
-            rRequest.LoadCompleted(rLoadAsyncRequest.asset);
+                rRequest.LoadCompleted(rLoadAsyncRequest.asset);
+            }
+            else
+            {
+                yield return SceneManager.LoadSceneAsync(rAssetPath, rRequest.SceneMode);
+                if (rRequest.IsActiveScene)
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(rAssetPath));
+
+                rRequest.LoadCompleted(null);
+            }
         }
     }
 #endregion

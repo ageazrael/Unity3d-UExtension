@@ -13,10 +13,7 @@ namespace UExtension
 
             return rSearchType.BaseType == rBaseType ? rSearchType : null;
         }
-        public static Type SearchBaseTo<T>(this Type rType)
-        {
-            return SearchBaseTo(rType, typeof(T));
-        }
+        public static Type SearchBaseTo<T>(this Type rType) => SearchBaseTo(rType, typeof(T));
     }
 
 }

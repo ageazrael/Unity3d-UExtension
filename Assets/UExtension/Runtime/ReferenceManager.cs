@@ -11,18 +11,10 @@ namespace UExtension
             this.mName      = rName;
             this.mManager   = rManager;
         }
-        public string Name
-        {
-            get { return mName; }
-        }
-        public int ReferenceCount
-        {
-            get { return mReferenceCount; }
-        }
-        public ReferenceManager Manager
-        {
-            get { return mManager; }
-        }
+        public string Name => this.mName;
+        public int ReferenceCount => this.mReferenceCount;
+
+        public ReferenceManager Manager => this.mManager;
 
         public int Increment()
         {
@@ -76,10 +68,8 @@ namespace UExtension
         {
             this.mImmediate = bImmediate;
         }
-        public bool Contains(string rName)
-        {
-            return mReferenceDictionary.ContainsKey(rName);
-        }
+        public bool Contains(string rName) => mReferenceDictionary.ContainsKey(rName);
+
         public T Get(string rName)
         {
             T rResult = default(T);

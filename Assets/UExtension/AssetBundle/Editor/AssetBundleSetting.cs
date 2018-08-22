@@ -7,7 +7,7 @@ using System.IO;
 
 namespace UExtension
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(menuName = "UExtension/Asset Bundle Setting")]
     public class AssetBundleSetting : AssetBundleSettingBase
     {
         public enum PackageType
@@ -30,10 +30,11 @@ namespace UExtension
 
 		public override string ResourcesPath
 		{
-			get { 
-				if (string.IsNullOrEmpty(AssetDatabase.GetAssetPath(this)))
+			get {
+                var rSettingPath = AssetDatabase.GetAssetPath(this);
+                if (string.IsNullOrEmpty(rSettingPath))
 					return string.Empty;
-				return PathExtension.GetPathWithoutExtension (AssetDatabase.GetAssetPath (this)) + "/Resources";
+				return PathExtension.GetPathWithoutExtension(rSettingPath) + "/Resources";
 			} 
 		}
 

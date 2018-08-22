@@ -8,7 +8,7 @@ using System;
 namespace UExtension
 {
 	[CustomPropertyDrawer(typeof(TypeSearchAttribute))]
-	public class TypeSearchDrawer : PropertyDrawer
+	public class TypeSearchAttributeDrawer : PropertyDrawer
 	{
 		public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
 		{

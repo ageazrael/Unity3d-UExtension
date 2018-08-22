@@ -48,18 +48,11 @@ namespace UExtension
             this.Impl.Seed = nSeed;
         }
 
-        public int Next()
-        {
-            return (int)this.Impl.Next();
-        }
-        public float NextFloat()
-        {
-            return UInt2Float(this.Impl.Next());
-        }
-        public byte NextByte()
-        {
-            return UInt2Byte(this.Impl.Next());
-        }
+        public int Next() => (int)this.Impl.Next();
+
+        public float NextFloat() => UInt2Float(this.Impl.Next());
+        public byte NextByte() => UInt2Byte(this.Impl.Next());
+
         public float Range(float min, float max)
         {
             var t = this.NextFloat();
@@ -88,14 +81,8 @@ namespace UExtension
             }
         }
 
-        static float UInt2Float(uint value)
-        {
-            return ((float)(value & 0x007FFFFF)) * (1.0f / 8388607.0f);
-        }
-        static byte UInt2Byte(uint value)
-        {
-            return (byte)(value >> (23 - 8));
-        }
+        static float UInt2Float(uint value) => ((float)(value & 0x007FFFFF)) * (1.0f / 8388607.0f);
+        static byte UInt2Byte(uint value) => (byte)(value >> (23 - 8));
 
         protected IRandom Impl = ReflectExtension.TConstruct<IRandom>(typeof(T));
     }

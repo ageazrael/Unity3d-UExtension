@@ -32,11 +32,8 @@ namespace UExtension
             {
                 lock (GInstanceLock)
                 {
-                    if (null != GInstance)
-                    {
-                        GInstance.Dispose();
-                        GInstance = default(T);
-                    }
+                    GInstance?.Dispose();
+                    GInstance = default(T);
                 }
             }
         }

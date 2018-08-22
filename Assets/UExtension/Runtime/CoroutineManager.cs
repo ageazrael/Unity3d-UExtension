@@ -13,20 +13,13 @@ namespace UExtension
         {
             if (!GCoroutineObject)
             {
-                var go = new GameObject("CoroutineObject");
-                go.hideFlags = HideFlags.HideAndDontSave;
+                var go = new GameObject("CoroutineObject") { hideFlags = HideFlags.HideAndDontSave };
                 GCoroutineObject = go.AddComponent<CoroutineObject>();
             }
-            if (!GCoroutineObject)
-                return default(Coroutine);
 
-            return GCoroutineObject.StartCoroutine(rEnumerator);
+            return GCoroutineObject?.StartCoroutine(rEnumerator);
         }
-        public static void Stop(Coroutine rCoroutine)
-        {
-            if (GCoroutineObject)
-                GCoroutineObject.StopCoroutine(rCoroutine);
-        }
+        public static void Stop(Coroutine rCoroutine) => GCoroutineObject?.StopCoroutine(rCoroutine);
         
         private static CoroutineObject GCoroutineObject;
     }
@@ -42,10 +35,7 @@ namespace UExtension
             if (null != mCoroutine)
                 CoroutineManager.Stop(mCoroutine);
         }
-        public Coroutine WaitCoroutine
-        {
-            get { return mCoroutine; }
-        }
+        public Coroutine WaitCoroutine => this.mCoroutine;
 
         Coroutine mCoroutine;
     }

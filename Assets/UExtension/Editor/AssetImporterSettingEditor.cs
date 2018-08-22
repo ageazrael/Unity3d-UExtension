@@ -21,7 +21,7 @@ namespace UExtension
                 return Path.GetDirectoryName(AssetDatabase.GetAssetPath(rObjects[0]));
         }
 
-        [MenuItem("Assets/Create/Asset Importer Setting")]
+        [MenuItem("Assets/Create/UExtension/Asset Importer Setting")]
         public static void CreateAssetImporter()
         {
             var rSelectionPath = GetSelectionPath();
@@ -29,7 +29,7 @@ namespace UExtension
             AssetDatabase.CreateAsset(rAssetImporterSetting, PathExtension.Combine(rSelectionPath, "AssetImporterSetting.asset"));
             ProjectWindowUtil.ShowCreatedAsset(rAssetImporterSetting);
         }
-        [MenuItem("Assets/Create/Asset Importer Setting", true)]
+        [MenuItem("Assets/Create/UExtension/Asset Importer Setting", true)]
         public static bool CreateAssetImporterVerify()
         {
             var rSelectionPath = GetSelectionPath();

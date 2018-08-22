@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace UExtension
 {
@@ -16,9 +15,8 @@ namespace UExtension
     }
     public class JsonClass : JsonNode
     {
-        public override JsonType            Type { get { return JsonType.Class; } }
+        public override JsonType            Type => JsonType.Class;
         public Dictionary<string, JsonNode> Childs = new Dictionary<string, JsonNode>();
-
 
         public JsonNode this[string rName]
         {
@@ -26,19 +24,13 @@ namespace UExtension
             set { this.Childs[rName] = value; }
         }
 
-        public void Add(string rName, JsonNode rNode)
-        {
-            this.Childs.Add(rName, rNode);
-        }
-        public void Remove(string rName)
-        {
-            this.Childs.Remove(rName);
-        }
+        public void Add(string rName, JsonNode rNode) => this.Childs.Add(rName, rNode);
+        public void Remove(string rName) => this.Childs.Remove(rName);
     }
     public class JsonArray : JsonNode
     {
-        public override JsonType            Type { get { return JsonType.Array; } }
-        public List<JsonNode>               Array = new List<JsonNode>();
+        public override JsonType    Type => JsonType.Array;
+        public List<JsonNode>       Array = new List<JsonNode>();
 
         public JsonNode this[int nIndex]
         {
@@ -46,24 +38,17 @@ namespace UExtension
             set { this.Array[nIndex] = value; }
         }
 
-        public void Add(JsonNode rNode)
-        {
-            this.Array.Add(rNode);
-        }
+        public void Add(JsonNode rNode) => this.Array.Add(rNode);
     }
     public class JsonData : JsonNode
     {
-        public override JsonType            Type { get { return JsonType.Data; } }
-        public string                       Data;
+        public override JsonType    Type => JsonType.Data;
+        public string               Data;
     }
 
     public class Json
     {
-        public static JsonNode Parse(string text)
-        {
-            return Parse(new Tokenizer(text, true));
-        }
-
+        public static JsonNode Parse(string text) => Parse(new Tokenizer(text, true));
         public static JsonNode Parse(Tokenizer rTokenizer)
         {
             JsonNode rNode = null;

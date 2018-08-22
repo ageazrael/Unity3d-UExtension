@@ -41,24 +41,17 @@ namespace UExtension
 	
 			return rBuilder.ToString();
 		}
-		public static string Combine(params string[] rPaths)
-		{
-			return Combine('/', rPaths);
-		}
+		public static string Combine(params string[] rPaths) => Combine('/', rPaths);
 
-        public static string GetPathWithoutExtension(string rPath)
-        {
-            return Combine(Path.GetDirectoryName(rPath), Path.GetFileNameWithoutExtension(rPath));
-        }
-
-		/// <summary>
-		/// 复制文件到指定位置
-		///     example:
-		///         Copy("/git/build/Gen/*.cs", "/git/build/tmp", true);
-		///         Copy("/git/build/Gen", "/git/build/tmp", true);
-		///         Copy("/git/build/Gen/asm.cs", "/git/build/tmp/asm.cs", true);
-		/// </summary>
-		public static void Copy(string source, string dest, bool overwrite)
+        public static string GetPathWithoutExtension(string rPath) => Combine(Path.GetDirectoryName(rPath), Path.GetFileNameWithoutExtension(rPath));
+        /// <summary>
+        /// 复制文件到指定位置
+        ///     example:
+        ///         Copy("/git/build/Gen/*.cs", "/git/build/tmp", true);
+        ///         Copy("/git/build/Gen", "/git/build/tmp", true);
+        ///         Copy("/git/build/Gen/asm.cs", "/git/build/tmp/asm.cs", true);
+        /// </summary>
+        public static void Copy(string source, string dest, bool overwrite)
 		{
 			if (File.Exists(source))
 			{

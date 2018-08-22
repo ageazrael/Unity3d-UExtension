@@ -8,14 +8,13 @@ using System.Linq;
 
 namespace UExtension
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(menuName = "UExtension/Native Extension Setting")]
     public class NativeExtensionSetting : ScriptableObject
     {
         [AttributeUsage(AttributeTargets.Field)]
         public class TargetAttribute : Attribute
         {
             public BuildTargetGroup Target;
-            
             public TargetAttribute(BuildTargetGroup target)
             {
                 this.Target = target;
@@ -72,6 +71,18 @@ namespace UExtension
             public BuildTarget  Target;
             public bool         AnyTarget;
         }
+        [Serializable]
+        public class XcodeConfiguration
+        {
+            public Framework[]      Frameworks;
+		    public Bundle[]         Bundles;
+            public Library[]        Librarys;
+		    public CompileFile[]    CompileFiles;
+		    public Framework[]      DependentFrameworks;
+		    public Library[]        DependentLibrarys;
+		    public BuildProperty[]  BuildPropertys;
+            public DefaultAsset[]   MergeInfoPlist;
+        }
 
         [SerializeField]
 		private bool            Enabled;
@@ -79,6 +90,7 @@ namespace UExtension
         public NativePlugin[]   Plugins;
 
 
+        [Header("iOS")]
 		public Framework[]      Frameworks;
 		public Bundle[]         Bundles;
         public Library[]        Librarys;
@@ -89,10 +101,8 @@ namespace UExtension
         public DefaultAsset[]   MergeInfoPlist;
 
         [MenuItem("CONTEXT/NativeExtensionSetting/Scan")]
-        static void ScanMenuItem(MenuCommand rCommand)
-        {
-            (rCommand.context as NativeExtensionSetting).Scan();
-        }
+        static void ScanMenuItem(MenuCommand rCommand) => (rCommand.context as NativeExtensionSetting).Scan();
+
         public void Scan()
         {
             var rAssetPath = AssetDatabase.GetAssetPath(this);
@@ -207,14 +217,14 @@ namespace UExtension
 			BuildTargetGroup.Unknown,
 			BuildTargetGroup.Standalone,
 			BuildTargetGroup.iOS,
-			BuildTargetGroup.Android,
+            BuildTargetGroup.tvOS,
+            BuildTargetGroup.Android,
 			BuildTargetGroup.WebGL,
 			BuildTargetGroup.WSA,
 			BuildTargetGroup.PSP2,
 			BuildTargetGroup.PS4,
 			BuildTargetGroup.XboxOne,
 			BuildTargetGroup.N3DS,
-			BuildTargetGroup.tvOS,
 			BuildTargetGroup.Facebook,
 			BuildTargetGroup.Switch,
 		};

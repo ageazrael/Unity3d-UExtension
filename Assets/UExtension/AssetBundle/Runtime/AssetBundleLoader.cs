@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -71,25 +72,13 @@ namespace UExtension
                 : base(rName, rManager)
             { }
             
-            public UnityEngine.AssetBundle  Bundle;
-            public BundleInfo               Info;
+            public AssetBundle  Bundle;
+            public BundleInfo   Info;
 
-            public string                   BundleName
-            {
-                get { return Info.BundleName; }
-            }
-            public string                   BundleFilePath
-            {
-                get { return Info.BundleFilePath; }
-            }
-            public string BundleURL
-            {
-                get { return Info.BundleURL; }
-            }
-            public string[]                 BundleDepend
-            {
-                get { return Info.BundleDepend; }
-            }
+            public string       BundleName      => Info.BundleName;
+            public string       BundleFilePath  => Info.BundleFilePath;
+            public string       BundleURL       => Info.BundleURL;
+            public string[]     BundleDepend    => Info.BundleDepend;
 
             public override void Discard()
             {
@@ -107,10 +96,7 @@ namespace UExtension
             public string[] BundleDepend;
         }
 
-        public bool ContainsAsset(string rAssetPath)
-        {
-            return mAssetToBundle.ContainsKey(rAssetPath);
-        }
+        public bool ContainsAsset(string rAssetPath) => mAssetToBundle.ContainsKey(rAssetPath);
 
         public Object LoadAsset(string rAssetPath, Type rAssetType)
         {
@@ -133,6 +119,12 @@ namespace UExtension
             CoroutineManager.Start(this.HandleLoadAssetAsync(rRequest, rAssetPath, rAssetType));
             return rRequest;
         }
+        public AssetLoaderRequest LoadSceneAsync(string rSceneName, LoadSceneMode rSceneMode, bool bIsActiveScene)
+        {
+            var rRequest = new AssetLoaderRequest() { IsAsset = false, SceneMode = rSceneMode, IsActiveScene = bIsActiveScene };
+            CoroutineManager.Start(this.HandleLoadAssetAsync(rRequest, rSceneName, typeof(Object)));
+            return rRequest;
+        }
         public TAssetLoaderRequest<T> LoadAssetAsync<T>(string rAssetPath)
             where T : UnityEngine.Object
         {
@@ -151,12 +143,10 @@ namespace UExtension
             if (rAssetBundleInfoPath.Contains("://"))
                 return; // TODO: invalid path
 
-			AddAssetBundleInfo(ABInfoArchive.StaticLoadArchive(rAssetBundleInfoPath), PathExtension.Combine(rRootPath, RuntimePlatformPath.Path), false);
+			AddAssetBundleInfo(ABInfoArchive.StaticLoadArchive(rAssetBundleInfoPath),
+                PathExtension.Combine(rRootPath, RuntimePlatformPath.Path), false);
         }
-        public void UnloadUnuseAssetBundle()
-        {
-            mBundleManager.DiscardReferenceEmpty();
-        }
+        public void UnloadUnuseAssetBundle() => mBundleManager.DiscardReferenceEmpty();
         public void UnloadAll()
         {
             mAssetToBundle.Clear();
@@ -249,10 +239,22 @@ namespace UExtension
 
                 rAssetBundleRef.Decrement();
             }
-            var rAssetRequest = rAssetBundleRef.Bundle.LoadAssetAsync(mAssetToFullPath[rAssetPath], rAssetType);
-            yield return rAssetRequest;
+            if (rRequest.IsAsset)
+            {
+                var rAssetRequest = rAssetBundleRef.Bundle.LoadAssetAsync(mAssetToFullPath[rAssetPath], rAssetType);
+                yield return rAssetRequest;
 
-			rRequest.LoadCompleted(rAssetRequest.asset);
+                rRequest.LoadCompleted(rAssetRequest.asset);
+            }
+            else
+            {
+                yield return SceneManager.LoadSceneAsync(rAssetPath, rRequest.SceneMode);
+
+                if (rRequest.IsActiveScene)
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(rAssetPath));
+
+                rRequest.LoadCompleted(null);
+            }
         }
         protected IEnumerator CacheBundleDependByWWW(string rAssetBundleName)
         {
@@ -324,8 +326,10 @@ namespace UExtension
 
 				mBundleInfos[rBundleName]		= rBundleInfo;
 			}
-			mAssetToBundle   = rABInfoArchive.GenerateAssetToBundle();
-			mAssetToFullPath = rABInfoArchive.GenerateAssetToFullPath ();
+            foreach(var rPair in rABInfoArchive.GenerateAssetToBundle())
+                mAssetToBundle[rPair.Key] = rPair.Value;
+            foreach(var rPair in rABInfoArchive.GenerateAssetToFullPath())
+			    mAssetToFullPath[rPair.Key] = rPair.Value;
         }
         
         Dictionary<string, string>      mAssetToBundle  = new Dictionary<string, string>();

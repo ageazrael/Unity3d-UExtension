@@ -19,14 +19,9 @@ namespace UExtension
             return rConstructor.Invoke(args);
         }
 
-        public static T Construct<T>(params object[] args)
-        {
-            return (T)Construct(typeof(T), args);
-        }
-        public static T TConstruct<T>(Type rType, params object[] args)
-        {
-            return (T)Construct(rType, args);
-        }
+        public static T Construct<T>(params object[] args) => (T)Construct(typeof(T), args);
+        public static T TConstruct<T>(Type rType, params object[] args) => (T)Construct(rType, args);
+
         public static Type GetMemberDataType(this MemberInfo rMemberInfo)
         {
             if (rMemberInfo.MemberType == MemberTypes.Field)
@@ -80,13 +75,10 @@ namespace UExtension
         ///     该函数返回true，但无法通过GetCustomAttributes获取。IsApplyAttr为了和GetCustomAttributes的结果对应，
         ///     IsApplyAttr返回true，GetCustomAttributes一定能获得。
         /// </summary>
-        public static bool IsApplyAttr<T>(this ICustomAttributeProvider rProvider, bool bInherit)
-        {
-            return rProvider.GetCustomAttributes(typeof(T), bInherit).Length > 0;
-        }
+        public static bool IsApplyAttr<T>(this ICustomAttributeProvider rProvider, bool bInherit) 
+            => rProvider.GetCustomAttributes(typeof(T), bInherit).Length > 0;
+
         public static bool IsApplyAttr(this ICustomAttributeProvider rProvider, Type rType, bool bInherit)
-        {
-            return rProvider.GetCustomAttributes(rType, bInherit).Length > 0;
-        }
+            => rProvider.GetCustomAttributes(rType, bInherit).Length > 0;
     }
 }
