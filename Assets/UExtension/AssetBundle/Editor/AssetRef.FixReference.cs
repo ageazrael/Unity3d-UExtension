@@ -12,25 +12,26 @@ namespace UExtension
 	{
 		public static System.Type AssetRefBaseType = typeof(AssetRefBase);
 
-		public static void ObjectFixAssetPath(System.Object rObject)
+		public static bool ObjectFixAssetPath(System.Object rObject)
 		{
 			if (null == rObject)
-				return;
+				return false;
 
 			if (!rObject.GetType().IsClass)
-				return;
+				return false;
 			
 			if (!typeof(UnityEngine.Object).IsAssignableFrom(rObject.GetType()) &&
 			    !rObject.GetType().IsDefined(typeof(System.SerializableAttribute), false))
-				return;
-			
+				return false;
+
+            var bFix = false;
 			foreach (var rFieldInfo in rObject.GetType().GetFields(BindingFlags.Instance|BindingFlags.NonPublic|BindingFlags.Public))
 			{
 				if (AssetRefBaseType.IsAssignableFrom(rFieldInfo.FieldType))
 				{
 					var rValue = rFieldInfo.GetValue(rObject);
 					if (null != rValue)
-						AssetRefBaseEditor.FixAssetPath(rValue as AssetRefBase);
+                        bFix = AssetRefBaseEditor.FixAssetPath(rValue as AssetRefBase) ? true : bFix;
 				}
 				else if (rFieldInfo.FieldType.IsArray || rFieldInfo.FieldType.GetInterface("System.Collections.IList") != null)
 				{
@@ -43,24 +44,24 @@ namespace UExtension
 								continue;
 
 							if (AssetRefBaseType.IsAssignableFrom(rNextObject.GetType ()))
-								AssetRefBaseEditor.FixAssetPath(rNextObject as AssetRefBase);
+								bFix = AssetRefBaseEditor.FixAssetPath(rNextObject as AssetRefBase) ? true : bFix;
 							else
-								ObjectFixAssetPath(rNextObject);
+								bFix = ObjectFixAssetPath(rNextObject) ? true : bFix;
 						}
 					}
 				}
 				else if (rFieldInfo.FieldType.IsClass)
 				{
-					ObjectFixAssetPath(rFieldInfo.GetValue (rObject));
+					bFix = ObjectFixAssetPath(rFieldInfo.GetValue (rObject)) ? true : bFix;
 				}
 			}
+            return bFix;
 		}
 
 		[MenuItem("Tools/UExtension/FixReference")]
 		public static void FixReference()
 		{
-			var rAssetGUIDs = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(GameObject).Name));
-			foreach (var rAssetGUID in rAssetGUIDs)
+			foreach (var rAssetGUID in AssetDatabase.FindAssets("t:GameObject"))
 			{
 				var rAssetPath = AssetDatabase.GUIDToAssetPath(rAssetGUID);
 				if (string.IsNullOrEmpty(rAssetPath))
@@ -69,22 +70,27 @@ namespace UExtension
 				var rAssetGO = AssetDatabase.LoadAssetAtPath<GameObject>(rAssetPath);
 				if (rAssetGO)
 				{
-					foreach(var rComponent in rAssetGO.GetComponentsInChildren<MonoBehaviour>(true))
-						ObjectFixAssetPath(rComponent);
+                    foreach (var rComponent in rAssetGO.GetComponentsInChildren<MonoBehaviour>(true))
+                    {
+                        if (ObjectFixAssetPath(rComponent))
+                            EditorUtility.SetDirty(rAssetGO);
+                    }
 				}
 			}
-			rAssetGUIDs = AssetDatabase.FindAssets(string.Format ("t:{0}", typeof(ScriptableObject).Name));
-			foreach (var rAssetGUID in rAssetGUIDs)
+			foreach (var rAssetGUID in AssetDatabase.FindAssets("t:ScriptableObject"))
 			{
 				var rAssetPath = AssetDatabase.GUIDToAssetPath(rAssetGUID);
 				if (string.IsNullOrEmpty(rAssetPath))
 					continue;
 
 				var rScriptable = AssetDatabase.LoadAssetAtPath<ScriptableObject>(rAssetPath);
-				if (rScriptable)
-					ObjectFixAssetPath(rScriptable);
-
-				Resources.UnloadAsset(rScriptable);
+                if (rScriptable)
+                {
+                    if (ObjectFixAssetPath(rScriptable))
+                        EditorUtility.SetDirty(rScriptable);
+                    else
+                        Resources.UnloadAsset(rScriptable);
+                }
 			}
 		}
 	}

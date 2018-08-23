@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b237486dffddf549ac7d091bfe845d3, type: 3}
+  m_Name: CharacterSettings
+  m_EditorClassIdentifier: 
+  Characters:
+  - Name: "\u50BB\u903C\u4E00\u53F7"
+    CharacterAsset:
+      AssetPath: Character0
+      AssetGUID: 33136cb0071b7f1499fe3f8ba7883ae9
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons3_38
+      AssetGUID: 2f055ed90c4d9e44db04c52455a714d5
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+  - Name: "\u50BB\u903C\u4E8C\u53F7"
+    CharacterAsset:
+      AssetPath: Character1
+      AssetGUID: 0ff250dfb5954c04bbd848200529ece2
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons8_69
+      AssetGUID: 41f6d9ab93fe30045847d3c109c79cdc
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+  - Name: "\u50BB\u903C\u4E09\u53F7"
+    CharacterAsset:
+      AssetPath: Character0
+      AssetGUID: 33136cb0071b7f1499fe3f8ba7883ae9
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons3_38
+      AssetGUID: 2f055ed90c4d9e44db04c52455a714d5
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+  - Name: "\u50BB\u903C\u56DB\u53F7"
+    CharacterAsset:
+      AssetPath: Character1
+      AssetGUID: 0ff250dfb5954c04bbd848200529ece2
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons8_69
+      AssetGUID: 41f6d9ab93fe30045847d3c109c79cdc
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+  - Name: "\u50BB\u903C\u4E94\u53F7"
+    CharacterAsset:
+      AssetPath: Character1
+      AssetGUID: 0ff250dfb5954c04bbd848200529ece2
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons8_69
+      AssetGUID: 41f6d9ab93fe30045847d3c109c79cdc
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0
+  - Name: "\u50BB\u903C\u516D\u53F7"
+    CharacterAsset:
+      AssetPath: Character0
+      AssetGUID: 33136cb0071b7f1499fe3f8ba7883ae9
+      AssetTypeFullName: 
+      LoadedAssetInstanceID: 0
+    HeadIcon:
+      AssetPath: GUI/789_Lorc_RPG_icons/Icons3_38
+      AssetGUID: 2f055ed90c4d9e44db04c52455a714d5
+      AssetTypeFullName: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      LoadedAssetInstanceID: 0

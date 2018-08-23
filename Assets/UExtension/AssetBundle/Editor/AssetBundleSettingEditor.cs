@@ -42,8 +42,9 @@ namespace UExtension
 
             GUILayout.Space(10);
 
+            var bNeedBuild = false;
             if (GUILayout.Button(string.Format("Build AssetBundle({0})", EditorUserBuildSettings.activeBuildTarget.ToString())))
-                AssetBundleBuilder.Build(mAssetBundleSetting, EditorUserBuildSettings.activeBuildTarget);
+                bNeedBuild = true;
 
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button(string.Format("Preview AssetBundle{0}", mAutoRefreshPreview ? "(Auto Update Preview)" : string.Empty)))
@@ -63,6 +64,9 @@ namespace UExtension
             EditorGUILayout.EndHorizontal();
 
             mBuildSettingPreview.OnGUI();
+
+            if (bNeedBuild)
+                AssetBundleBuilder.Build(mAssetBundleSetting, EditorUserBuildSettings.activeBuildTarget);
         }
     }
 

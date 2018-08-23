@@ -28,8 +28,6 @@ namespace UExtension
 					bNeedFix = true;
 			}
 
-			var rNextRect = EditorGUI.PrefixLabel(rTotalPosition, rLabel);
-
 			var rAssetType = Type.GetType(rAssetTypeFullName.stringValue);
 			if (null == rAssetType)
 				rAssetType = typeof(Object);
@@ -45,10 +43,10 @@ namespace UExtension
 					rPreloadAsset = EditorUtility.InstanceIDToObject(rLoadedAsset.intValue);
 			}
 
-			if (bNeedFix)
-				rNextRect.xMax -= 24;
+			if (bNeedFix && !Application.isPlaying)
+                rTotalPosition.xMax -= 24;
 
-			var rNewObject = EditorGUI.ObjectField(rNextRect, rPreloadAsset, rAssetType, false);
+			var rNewObject = EditorGUI.ObjectField(rTotalPosition, rLabel.text, rPreloadAsset, rAssetType, false);
 			if (EditorGUI.EndChangeCheck() && !Application.isPlaying)
 			{
 				if (rNewObject)
@@ -69,7 +67,7 @@ namespace UExtension
 
 			if (bNeedFix && !Application.isPlaying)
 			{
-				var rFixButtonRect = rNextRect;
+				var rFixButtonRect = rTotalPosition;
 				rFixButtonRect.xMin = rFixButtonRect.xMax;
 				rFixButtonRect.xMax = rFixButtonRect.xMax + 24;
 				if (GUI.Button(rFixButtonRect, "F"))

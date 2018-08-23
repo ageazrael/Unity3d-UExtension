@@ -137,13 +137,14 @@ namespace UExtension
 
         public void Refresh(AssetBundleSettingBase rBuildSetting)
         {
-            AssetBundleInfos.Clear();
+            this.AssetBundleInfos.Clear();
 
             var rAllBundles = rBuildSetting.GetAllBundle();
             foreach(var rBuildBundle in rAllBundles)
             {
-                AssetBundleInfos.Add(rBuildBundle.assetBundleName + "." + rBuildBundle.assetBundleVariant,
-                    rBuildBundle.assetNames);
+                var rBunldeName = rBuildBundle.assetBundleName + "." + rBuildBundle.assetBundleVariant;
+                if (!this.AssetBundleInfos.ContainsKey(rBunldeName))
+                    this.AssetBundleInfos.Add(rBunldeName, rBuildBundle.assetNames);
             }
             FadeGroupValue = new bool[rAllBundles.Length];
         }

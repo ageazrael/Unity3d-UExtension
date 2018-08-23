@@ -1,8 +1,14 @@
 # Unity3d-UExtension
 
-Version : **Unity3D 2017.1.0f3**
+Version : **Unity3D 2018.2.6f1**
 
 纯属于实验性质的东西哦～
+
+## AssetBundle
+> 1. AssetBundle搜索配置
+> 2. AssetBundle与Resources加载层抽象
+
+[Detail](Documents/AssetBundle.md)
 
 ## NativeExtension
 > 1. Xcode工程设置
