@@ -8,9 +8,9 @@ namespace UExtension.Example
 {
     public class AssetBundleMain : MonoBehaviour
     {
-        public GameObject GUI;
-        public ScrollRect Scrollview;
-        public UIChild TemplateItem;
+        public GameObject   GUI;
+        public ScrollRect   Scrollview;
+        public UIChild      TemplateItem;
 
         private CharacterSettings Settings;
 

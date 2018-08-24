@@ -1,9 +1,9 @@
-# AssetBundle
-* AssetBundle×ÊÔ´°üÅäÖÃ
+ï»¿# AssetBundle
+* AssetBundleèµ„æºåŒ…é…ç½®
 
 ![Asset Bundle.Character](AssetBundle.Character.png)
 
-* ¼ÓÔØAssetBundle×ÊÔ´
+* åŠ è½½AssetBundleèµ„æº
 ```cs
 AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath("AssetBundle/Character");
 
@@ -16,7 +16,8 @@ yield return rRequest;
 var rCharacterInstance = Instantiate(rRequest.Asset, null);
 ```
 
-* ¹Ø¼üAssetBundleÖĞµÄ×ÊÔ´ÓëResourcesÖĞµÄ×ÊÔ´
+* å…³è”AssetBundleä¸­çš„èµ„æºä¸Resourcesä¸­çš„èµ„æº
+
 ![Asset Ref.Character Settings](AssetRef.CharacterSettings.png)
 ```cs
 // Assets/Example/AssetBundle/Scripts/CharacterSettings.cs
@@ -30,4 +31,4 @@ var rCharacterInstance = Instantiate(rRequest.Asset, null);
 
 
 # Bug
-* `AssetLoader.LoadAsset("Character0", typeof(GameObject))`¶àµ÷ÓÃ¼¸´ÎAssetBundle²»Ö§³Ö¶à´Î¼ÓÔØPrefab
+* `AssetLoader.LoadAsset("Character0", typeof(GameObject))`å¤šè°ƒç”¨å‡ æ¬¡AssetBundleä¸æ”¯æŒå¤šæ¬¡åŠ è½½Prefab
