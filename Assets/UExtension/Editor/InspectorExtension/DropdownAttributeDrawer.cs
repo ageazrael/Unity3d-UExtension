@@ -7,7 +7,7 @@ using UnityEditor;
 namespace UExtension
 {
     [CustomPropertyDrawer(typeof(DropdownAttribute))]
-    public class DropdownAttributeDrawer : ExtensionPropertyDrawer
+    public class DropdownAttributeDrawer : InspectorExtensionPropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -15,7 +15,7 @@ namespace UExtension
             return base.GetPropertyHeight(property, label) * (rAttribute.PreviewValue ? 2 : 1);
         }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var rAttribute = this.attribute as DropdownAttribute;
 
@@ -29,9 +29,10 @@ namespace UExtension
 
             if (rAttribute.PreviewValue)
             {
+                var bOldEnabled = GUI.enabled;
                 GUI.enabled = false;
                 EditorGUI.PropertyField(position, property, new GUIContent("\tPreview"));
-                GUI.enabled = true;
+                GUI.enabled = bOldEnabled;
             }
         }
 
@@ -159,13 +160,7 @@ namespace UExtension
                 return;
             }
 
-            var rPropertyPath = property.propertyPath;
-            if (rPropertyPath.Contains("." + property.name))
-                rPropertyPath = rPropertyPath.Replace("." + property.name, string.Empty);
-            else if (rPropertyPath == property.name)
-                rPropertyPath = "";
-
-            var rTargetObject = this.GetBaseProperty(property.serializedObject.targetObject, rPropertyPath);
+            var rTargetObject = this.GetTargetObject(property);
 
             var nBindingFlags = BindingFlags.Instance|BindingFlags.Static|BindingFlags.GetField|BindingFlags.GetProperty|BindingFlags.NonPublic|BindingFlags.Public;
             var rMemberInfoes = rTargetObject.GetType().GetMember(rAttribute.MappingValueName, nBindingFlags);

@@ -27,7 +27,7 @@ namespace UExtension
                 {"瞎鸡巴动", AnimationCurve.EaseInOut(0, 0, 2, 1) },
             };
 
-            [Dropdown("GCharIcons", PreviewValue = true)]
+            [Dropdown("GCharIcons", PreviewValue = true, Readonly = true)]
             public Texture2D CharIcons;
             public static Dictionary<string, Texture2D> GCharIcons
             {
@@ -59,11 +59,14 @@ namespace UExtension
         [MinMax(0, 200)]
         public int S2;
 
-        [MinMax(0, 100, IsSlider = true)]
+        [MinMax(0, 100, IsSlider = true, IsVisibleControllerValue = "S2IsValid")]
         public Vector2 V2;
 
-        [ResizableTextArea]
+        [ResizableTextArea(IsEnableControllerValue = "S1IsValid")]
         public string Text;
 
+
+        private bool S1IsValid => this.S1 > 0;
+        private bool S2IsValid => this.S2 > 0;
     }
 }

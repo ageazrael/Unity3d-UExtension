@@ -8,9 +8,9 @@ namespace UExtension
     /// Enum mask attribute drawer.
     /// </summary>
     [CustomPropertyDrawer(typeof(EnumMaskAttribute))]
-    public class EnumMaskAttributeDrawer : ExtensionPropertyDrawer
+    public class EnumMaskAttributeDrawer : InspectorExtensionPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType != SerializedPropertyType.Enum)
             {

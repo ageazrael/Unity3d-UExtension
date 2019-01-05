@@ -5,7 +5,7 @@ using System;
 namespace UExtension
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class TypeSearchAttribute : PropertyAttribute
+    public class TypeSearchAttribute : InspectorExtensionAttribute
     {
         public Type TypeSearchType;
 

@@ -8,9 +8,9 @@ using System;
 namespace UExtension
 {
 	[CustomPropertyDrawer(typeof(TypeSearchAttribute))]
-	public class TypeSearchAttributeDrawer : PropertyDrawer
-	{
-		public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
+	public class TypeSearchAttributeDrawer : InspectorExtensionPropertyDrawer
+    {
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			List<string> PopupNames = (this.attribute as TypeSearchAttribute).TypeFullNames;
 			int nSelectinIndex = PopupNames.FindIndex( (arg) => { return arg == property.stringValue; });

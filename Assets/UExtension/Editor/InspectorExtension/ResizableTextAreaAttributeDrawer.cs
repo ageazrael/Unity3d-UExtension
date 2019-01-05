@@ -6,10 +6,13 @@ using UnityEditor;
 namespace UExtension
 {
     [CustomPropertyDrawer(typeof(ResizableTextAreaAttribute))]
-    public class ResizableTextAreaAttributeDrawer : ExtensionPropertyDrawer
+    public class ResizableTextAreaAttributeDrawer : InspectorExtensionPropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
+            if (base.GetPropertyHeight(property, label) == 0)
+                return 0;
+
             var lineCount = 0;
             if (property.propertyType == SerializedPropertyType.String)
             {
@@ -22,7 +25,7 @@ namespace UExtension
             }
             return EditorGUIUtility.singleLineHeight * 2 + EditorStyles.textArea.lineHeight * lineCount;
         }
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
             if (property.propertyType == SerializedPropertyType.String)
