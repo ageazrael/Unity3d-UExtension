@@ -9,7 +9,7 @@ using System.Reflection;
 namespace UExtension
 {
     [CustomPropertyDrawer(typeof(InspectorExtensionAttribute))]
-    public abstract class InspectorExtensionPropertyDrawer : PropertyDrawer
+    public class InspectorExtensionPropertyDrawer : PropertyDrawer
     {
         protected bool GetControllerValue(SerializedProperty property, string rControllerValue)
         {
