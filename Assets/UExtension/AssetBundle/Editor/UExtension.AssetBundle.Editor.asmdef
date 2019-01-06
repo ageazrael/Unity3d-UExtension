@@ -1,0 +1,16 @@
+{
+    "name": "UExtension.AssetBundle.Editor",
+    "references": [
+        "UExtension",
+        "UExtension.Editor",
+        "UExtension.AssetBundle"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

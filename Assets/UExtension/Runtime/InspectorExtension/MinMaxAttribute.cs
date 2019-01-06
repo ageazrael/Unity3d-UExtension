@@ -4,7 +4,7 @@ using System;
 namespace UExtension
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class MinMaxAttribute : PropertyAttribute
+    public class MinMaxAttribute : InspectorExtensionAttribute
     {
         public float MinValue;
         public float MaxValue;

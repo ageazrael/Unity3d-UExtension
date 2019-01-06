@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UExtension;
+
 namespace UExtension.Example
 {
 
@@ -16,7 +18,13 @@ namespace UExtension.Example
             public RGameObject CharacterAsset;
 
             public RTexture2D HeadIcon;
+
+            public float HPBase;
+            public float Atkbase;
         }
+
+        public AnimationCurve HPCurve;
+        public AnimationCurve AtkCurve;
 
         public CharacterInfo[] Characters;
     }

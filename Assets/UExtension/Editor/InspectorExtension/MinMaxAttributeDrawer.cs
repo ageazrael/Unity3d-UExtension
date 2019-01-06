@@ -4,9 +4,9 @@ using UnityEditor;
 namespace UExtension
 {
     [CustomPropertyDrawer(typeof(MinMaxAttribute))]
-    public class MinMaxAttributeDrawer : ExtensionPropertyDrawer
+    public class MinMaxAttributeDrawer : InspectorExtensionPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var rAttribute = this.attribute as MinMaxAttribute;
 

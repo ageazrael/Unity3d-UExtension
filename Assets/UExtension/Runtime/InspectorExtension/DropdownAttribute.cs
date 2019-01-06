@@ -6,7 +6,7 @@ using System;
 namespace UExtension
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class DropdownAttribute : PropertyAttribute
+    public class DropdownAttribute : InspectorExtensionAttribute
     {
         public string                       MappingValueName;
         public Dictionary<string, object>   MappingValues;

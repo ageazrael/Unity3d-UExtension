@@ -9,13 +9,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd24ebc45324f14abec7e548b6b0e4c, type: 3}
-  m_Name: AssetImporterSetting
+  m_Script: {fileID: 11500000, guid: 25a00062e93a34843a60510b22512bc9, type: 3}
+  m_Name: Inspector Extension Example Setting
   m_EditorClassIdentifier: 
-  TextureImporter:
-  - RegexpMatch: 
-    TextureType: 0
-    SelectType: 2
+  SubstructArray:
+  - SelectType: 1
+    CharMoveCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0.5
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 1
+        inSlope: 0.5
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    CharIcons: {fileID: 0}
+  - SelectType: 2
     CharMoveCurve:
       serializedVersion: 2
       m_Curve:
@@ -42,14 +66,17 @@ MonoBehaviour:
       m_RotationOrder: 4
     CharIcons: {fileID: 0}
   Value: 0
-  S1: 0
-  S2: 0
-  V2: {x: 75.00001, y: 100}
-  Text: '454545
+  S1: 0.75
+  S2: 42
+  V2: {x: 0, y: 100}
+  Text: 'fasdfasd
 
-    4554545
+    fas
 
-    45454646
+    df
 
+    a
 
-'
+    sdf
+
+    asdf'

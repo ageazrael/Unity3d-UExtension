@@ -7,9 +7,9 @@ namespace UExtension
     /// FolderAttribute editor
     /// </summary>
 	[CustomPropertyDrawer(typeof(FolderAttribute))]
-    public class FolderAttributeDrawer : ExtensionPropertyDrawer
+    public class FolderAttributeDrawer : InspectorExtensionPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType != SerializedPropertyType.String)
             {
@@ -87,9 +87,9 @@ namespace UExtension
     /// FilePathAttribute editor
     /// </summary>
     [CustomPropertyDrawer(typeof(FilePathAttribute))]
-    public class FilePathAttributeDrawer : ExtensionPropertyDrawer
+    public class FilePathAttributeDrawer : InspectorExtensionPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnInspectorExtensionGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType != SerializedPropertyType.String)
             {

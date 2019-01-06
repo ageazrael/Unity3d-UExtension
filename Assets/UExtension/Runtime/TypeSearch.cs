@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System;
 
-using UnityEngine;
-
 namespace UExtension
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]

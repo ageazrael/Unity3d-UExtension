@@ -19,7 +19,7 @@ namespace UExtension
         public static string AssetPathRoot = Application.dataPath + "/";
     }
     [AttributeUsage(AttributeTargets.Field)]
-    public class FolderAttribute : PropertyAttribute
+    public class FolderAttribute : InspectorExtensionAttribute
     {
         public PathType Type;
         public string Key;
@@ -33,7 +33,7 @@ namespace UExtension
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    public class FilePathAttribute : PropertyAttribute
+    public class FilePathAttribute : InspectorExtensionAttribute
     {
         public PathType Type;
         public string[] Filters;
