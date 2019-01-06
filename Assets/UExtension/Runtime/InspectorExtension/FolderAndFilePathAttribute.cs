@@ -13,7 +13,7 @@ namespace UExtension
         ResourcesPath,
         ProjectPath,
     }
-    public class PathRoot
+    public static class PathRoot
     {
         public static string ProjectPathRoot = Application.dataPath.Replace("/Assets", string.Empty) + "/";
         public static string AssetPathRoot = Application.dataPath + "/";

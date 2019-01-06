@@ -118,7 +118,7 @@ namespace UExtension
                 else if (rPair.Value is string)
                     rValues[nIndex] = System.Convert.ToSingle((string)rPair.Value);
 
-                if (rValues[nIndex] == property.floatValue)
+                if (System.Math.Abs(rValues[nIndex] - property.floatValue) < float.Epsilon)
                     nSelectionIndex = nIndex;
 
                 nIndex++;
@@ -159,13 +159,7 @@ namespace UExtension
                 return;
             }
 
-            var rPropertyPath = property.propertyPath;
-            if (rPropertyPath.Contains("." + property.name))
-                rPropertyPath = rPropertyPath.Replace("." + property.name, string.Empty);
-            else if (rPropertyPath == property.name)
-                rPropertyPath = "";
-
-            var rTargetObject = this.GetBaseProperty(property.serializedObject.targetObject, rPropertyPath);
+            var rTargetObject = this.GetTargetObject(property);
 
             var nBindingFlags = BindingFlags.Instance|BindingFlags.Static|BindingFlags.GetField|BindingFlags.GetProperty|BindingFlags.NonPublic|BindingFlags.Public;
             var rMemberInfoes = rTargetObject.GetType().GetMember(rAttribute.MappingValueName, nBindingFlags);
@@ -223,7 +217,7 @@ namespace UExtension
                 rValues[nIndex] = rPair.Value;
 
                 if ((property.propertyType == SerializedPropertyType.Integer         && (int)rPair.Value == property.intValue) ||
-                    (property.propertyType == SerializedPropertyType.Float           && (float)rPair.Value == property.floatValue) ||
+                    (property.propertyType == SerializedPropertyType.Float           && System.Math.Abs((float)rPair.Value - property.floatValue) < float.Epsilon) ||
                     (property.propertyType == SerializedPropertyType.String          && (string)rPair.Value == property.stringValue) ||
                     (property.propertyType == SerializedPropertyType.Color           && (Color)rPair.Value == property.colorValue) ||
                     (property.propertyType == SerializedPropertyType.ObjectReference && (Object)rPair.Value == property.objectReferenceValue) || 
@@ -297,19 +291,19 @@ namespace UExtension
                 return false;
             for (var nIndex = 0; nIndex < a.length; ++ nIndex)
             {
-                if (a.keys[nIndex].inTangent != b.keys[nIndex].inTangent)
+                if (System.Math.Abs(a.keys[nIndex].inTangent - b.keys[nIndex].inTangent) > float.Epsilon)
                     return false;
-                if (a.keys[nIndex].outTangent != b.keys[nIndex].outTangent)
+                if (System.Math.Abs(a.keys[nIndex].outTangent - b.keys[nIndex].outTangent) > float.Epsilon)
                     return false;
-                if (a.keys[nIndex].inWeight != b.keys[nIndex].inWeight)
+                if (System.Math.Abs(a.keys[nIndex].inWeight - b.keys[nIndex].inWeight) > float.Epsilon)
                     return false;
-                if (a.keys[nIndex].outWeight != b.keys[nIndex].outWeight)
+                if (System.Math.Abs(a.keys[nIndex].outWeight - b.keys[nIndex].outWeight) > float.Epsilon)
                     return false;
                 if (a.keys[nIndex].weightedMode != b.keys[nIndex].weightedMode)
                     return false;
-                if (a.keys[nIndex].value != b.keys[nIndex].value)
+                if (System.Math.Abs(a.keys[nIndex].value - b.keys[nIndex].value) > float.Epsilon)
                     return false;
-                if (a.keys[nIndex].time != b.keys[nIndex].time)
+                if (System.Math.Abs(a.keys[nIndex].time - b.keys[nIndex].time) > float.Epsilon)
                     return false;
             }
             return true;

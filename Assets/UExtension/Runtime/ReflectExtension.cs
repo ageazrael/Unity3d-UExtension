@@ -56,7 +56,7 @@ namespace UExtension
         {
             var rAttributes = rProvider.GetCustomAttributes(typeof(T), bInherit);
             if (rAttributes.Length == 0)
-                return default(T);
+                return default;
             return (T)(rAttributes[0]);
         }
         public static T[] GetCustomAttributes<T>(this ICustomAttributeProvider rProvider, bool bInherit)
