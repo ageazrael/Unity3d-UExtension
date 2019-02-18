@@ -65,6 +65,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     CharIcons: {fileID: 0}
+  IntArrays: 00000000
   Value: 0
   S1: 0.75
   S2: 42

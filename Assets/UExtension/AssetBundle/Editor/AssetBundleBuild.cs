@@ -30,9 +30,6 @@ namespace UExtension
 			case BuildTarget.PS4:
 				return "PS4";
 
-			case BuildTarget.PSP2:
-				return "PSP2";
-
 			case BuildTarget.XboxOne:
 				return "XboxOne";
 

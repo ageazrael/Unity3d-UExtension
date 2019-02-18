@@ -44,6 +44,8 @@ namespace UExtension.Example
 
         public Substruct[] SubstructArray;
 
+        public int[] IntArrays;
+
         [InspectorExtension(Readonly = true)]
         public int Value;
 

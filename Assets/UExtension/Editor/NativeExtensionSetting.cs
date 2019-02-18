@@ -221,10 +221,8 @@ namespace UExtension
             BuildTargetGroup.Android,
 			BuildTargetGroup.WebGL,
 			BuildTargetGroup.WSA,
-			BuildTargetGroup.PSP2,
 			BuildTargetGroup.PS4,
 			BuildTargetGroup.XboxOne,
-			BuildTargetGroup.N3DS,
 			BuildTargetGroup.Facebook,
 			BuildTargetGroup.Switch,
 		};

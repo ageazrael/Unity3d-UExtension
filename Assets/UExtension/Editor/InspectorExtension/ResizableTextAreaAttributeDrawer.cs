@@ -10,7 +10,7 @@ namespace UExtension
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (base.GetPropertyHeight(property, label) == 0)
+            if (base.GetPropertyHeight(property, label) <= 0)
                 return 0;
 
             var lineCount = 0;

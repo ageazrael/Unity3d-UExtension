@@ -32,9 +32,6 @@ namespace UExtension
 				case RuntimePlatform.PS4:
 					return "PS4";
 
-				case RuntimePlatform.PSP2:
-					return "PSP2";
-
 				case RuntimePlatform.XboxOne:
 					return "XboxOne";
 

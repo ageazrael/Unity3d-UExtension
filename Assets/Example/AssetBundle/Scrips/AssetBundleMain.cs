@@ -17,8 +17,8 @@ namespace UExtension.Example
         public void Awake()
         {
             var rAssetBundlePath = Application.dataPath.Replace("/Assets", "/AssetBundle");
-            AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath(PathExtension.Combine(rAssetBundlePath, "AddonLevel"));
-            AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath(PathExtension.Combine(rAssetBundlePath, "Character"));
+            AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath(Path.Combine(rAssetBundlePath, "AddonLevel"));
+            AssetBundleLoader.Instance.AttachAssetBundleInfoByFilePath(Path.Combine(rAssetBundlePath, "Character"));
 
             this.GUI.SetActive(false);
             this.StartCoroutine(this.HandlerInitialize());

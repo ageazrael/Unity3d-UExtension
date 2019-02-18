@@ -20,41 +20,55 @@ namespace UExtension
             else
                 return Path.GetDirectoryName(AssetDatabase.GetAssetPath(rObjects[0]));
         }
-
-        [MenuItem("Assets/Create/UExtension/Asset Importer Setting")]
-        public static void CreateAssetImporter()
-        {
-            var rSelectionPath = GetSelectionPath();
-            var rAssetImporterSetting = ScriptableObject.CreateInstance<AssetImporterSetting>();
-            AssetDatabase.CreateAsset(rAssetImporterSetting, PathExtension.Combine(rSelectionPath, "AssetImporterSetting.asset"));
-            ProjectWindowUtil.ShowCreatedAsset(rAssetImporterSetting);
-        }
-        [MenuItem("Assets/Create/UExtension/Asset Importer Setting", true)]
-        public static bool CreateAssetImporterVerify()
-        {
-            var rSelectionPath = GetSelectionPath();
-            return !AssetDatabase.LoadAssetAtPath<AssetImporterSetting>(
-                PathExtension.Combine(rSelectionPath, "AssetImporterSetting.asset")
-            );
-        }
     }
 
 
     public class AssetImporterSettingPostProcesss : AssetPostprocessor
     {
-        private List<AssetImporterSetting> Settings = new List<AssetImporterSetting>();
+        private Dictionary<string, List<AssetImporterSetting.ImporterSetting>> Settings;
 
         public AssetImporterSettingPostProcesss()
         {
+            this.Settings = new Dictionary<string, List<AssetImporterSetting.ImporterSetting>>();
         }
 
         void UpdateSettings()
         {
             this.Settings.Clear();
+
+            var rImporterSettings = new List<AssetImporterSetting>();
             var rAssetGuids = AssetDatabase.FindAssets("t:" + typeof(AssetImporterSetting));
             foreach (var rGuid in rAssetGuids)
             {
-                this.Settings.Add(AssetDatabase.LoadAssetAtPath<AssetImporterSetting>(AssetDatabase.GUIDToAssetPath(rGuid)));
+                var rAssetPath = AssetDatabase.GUIDToAssetPath(rGuid);
+                Debug.Log($"Load {rAssetPath}");
+
+                rImporterSettings.Add(AssetDatabase.LoadAssetAtPath<AssetImporterSetting>(rAssetPath));
+            }
+
+            rImporterSettings.Sort((a, b) => {
+                var rAPath = AssetDatabase.GetAssetPath(a);
+                var rBPath = AssetDatabase.GetAssetPath(b);
+
+                return rAPath.CompareTo(rBPath);
+            });
+
+            foreach(var rProcessSetting in rImporterSettings)
+            {
+                foreach(var rSetting in rImporterSettings)
+                {
+                    if (rProcessSetting == rSetting)
+                        continue;
+
+                    var rProcessAssetPath = AssetDatabase.GetAssetPath(rProcessSetting);
+                    var rSettingAssetPath = AssetDatabase.GetAssetPath(rSetting);
+
+                    if (!this.Settings.TryGetValue(rProcessAssetPath, out var rSettingList))
+                    {
+                        rSettingList = new List<AssetImporterSetting.ImporterSetting>();
+                        this.Settings.Add(rProcessAssetPath, rSettingList);
+                    }
+                }
             }
         }
 
