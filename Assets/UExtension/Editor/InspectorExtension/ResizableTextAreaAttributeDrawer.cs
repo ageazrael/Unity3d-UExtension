@@ -36,6 +36,7 @@ namespace UExtension
                 if (EditorGUI.EndChangeCheck())
                 {
                     property.stringValue = newText;
+                    this.DoChangedCallMethod(property);
                 }
             }
             else

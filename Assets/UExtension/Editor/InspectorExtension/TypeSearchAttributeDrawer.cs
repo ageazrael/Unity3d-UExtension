@@ -24,8 +24,11 @@ namespace UExtension
 			EditorGUI.indentLevel = 0;
 
 			int nNewSelectionIndex = EditorGUI.Popup(position, nSelectinIndex, PopupNames.ToArray());
-			if (nNewSelectionIndex != nSelectinIndex)
-				property.stringValue = PopupNames[nNewSelectionIndex];
+            if (nNewSelectionIndex != nSelectinIndex)
+            {
+                property.stringValue = PopupNames[nNewSelectionIndex];
+                this.DoChangedCallMethod(property);
+            }
 
 			EditorGUI.indentLevel = indent;
 			EditorGUI.EndProperty();

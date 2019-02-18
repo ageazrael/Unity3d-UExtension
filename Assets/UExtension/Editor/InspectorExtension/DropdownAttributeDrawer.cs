@@ -47,7 +47,10 @@ namespace UExtension
                 EditorGUI.BeginChangeCheck();
                 var nNewSelectionIndex = EditorGUI.Popup(position, label.text, nSelectionIndex, rKeys);
                 if (EditorGUI.EndChangeCheck())
+                {
                     property.intValue = rValues[nNewSelectionIndex];
+                    this.DoChangedCallMethod(property);
+                }
             }
             else if (property.propertyType == SerializedPropertyType.Float)
             {
@@ -58,7 +61,10 @@ namespace UExtension
                 EditorGUI.BeginChangeCheck();
                 var nNewSelectionIndex = EditorGUI.Popup(position, label.text, nSelectionIndex, rKeys);
                 if (EditorGUI.EndChangeCheck())
+                {
                     property.floatValue = rValues[nNewSelectionIndex];
+                    this.DoChangedCallMethod(property);
+                }
             }
             else if (property.propertyType == SerializedPropertyType.String)
             {
@@ -69,7 +75,10 @@ namespace UExtension
                 EditorGUI.BeginChangeCheck();
                 var nNewSelectionIndex = EditorGUI.Popup(position, label.text, nSelectionIndex, rKeys);
                 if (EditorGUI.EndChangeCheck())
+                {
                     property.stringValue = rValues[nNewSelectionIndex];
+                    this.DoChangedCallMethod(property);
+                }
             }
             else
             {
@@ -161,6 +170,8 @@ namespace UExtension
             }
 
             var rTargetObject = this.GetTargetObject(property);
+            if (rTargetObject == null)
+                return;
 
             var nBindingFlags = BindingFlags.Instance|BindingFlags.Static|BindingFlags.GetField|BindingFlags.GetProperty|BindingFlags.NonPublic|BindingFlags.Public;
             var rMemberInfoes = rTargetObject.GetType().GetMember(rAttribute.MappingValueName, nBindingFlags);
@@ -276,6 +287,8 @@ namespace UExtension
                     property.boundsIntValue = (BoundsInt)rValues[nNewSelectionIndex];
                 else if (property.propertyType == SerializedPropertyType.Quaternion)
                     property.quaternionValue = (Quaternion)rValues[nNewSelectionIndex];
+
+                this.DoChangedCallMethod(property);
             }
         }
 

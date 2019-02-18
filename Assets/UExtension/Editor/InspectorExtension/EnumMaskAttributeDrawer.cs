@@ -25,11 +25,13 @@ namespace UExtension
             {
                 var rNewEnumValue = EditorGUI.EnumFlagsField(position, label, rTargetEnum);
                 property.intValue = (int)Convert.ChangeType(rNewEnumValue, rTargetEnum.GetType());
+                this.DoChangedCallMethod(property);
             }
             else
             {
                 var rNewEnumValue = EditorGUI.EnumPopup(position, label, rTargetEnum);
                 property.intValue = (int)Convert.ChangeType(rNewEnumValue, rTargetEnum.GetType());
+                this.DoChangedCallMethod(property);
             }
             EditorGUI.EndProperty();
         }

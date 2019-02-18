@@ -19,9 +19,10 @@ namespace UExtension
             public string Value;
         }
         [Serializable]
-        public class ImporterSetting
+        public class ImporterFieldSetting
         {
-            public string Contain;
+            public string   Contains;
+            public bool     ImportSettingsMissing;
 
             [TypeSearch(typeof(AssetImporterTypes))]
             public string ImporterType;
@@ -29,6 +30,8 @@ namespace UExtension
             [Dropdown("ImporterTypeFields")]
             public string FieldName;
             public string FieldValue;
+
+            public Type GetImporterType() => Type.GetType(this.ImporterType + ", UnityEditor");
 
             public Dictionary<string, string> ImporterTypeFields
             {
@@ -49,7 +52,7 @@ namespace UExtension
                             var rProperties = this.mImporterType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                             foreach(var rPropInfo in rProperties)
                             {
-                                if (rPropInfo.CanWrite && rPropInfo.DeclaringType == this.mImporterType)
+                                if (rPropInfo.CanWrite)
                                 {
                                     this.mFieldNames.Add(rPropInfo.Name, rPropInfo.Name);
                                 }
@@ -63,7 +66,7 @@ namespace UExtension
             protected Type                          mImporterType;
             protected Dictionary<string, string>    mFieldNames = new Dictionary<string, string>();
         }
-        public ImporterSetting[] ImporterSettings;
+        public ImporterFieldSetting[] ImporterFieldSettings;
 
 
 

@@ -75,7 +75,10 @@ namespace UExtension
                 while (!bCompleted);
 
                 if (!bCancel)
+                {
                     property.stringValue = rNewPath;
+                    this.DoChangedCallMethod(property);
+                }
             }
 
             EditorGUI.indentLevel = indent;
@@ -151,7 +154,10 @@ namespace UExtension
                 while (!bCompleted);
 
                 if (!bCancel)
+                {
                     property.stringValue = rNewPath;
+                    this.DoChangedCallMethod(property);
+                }
             }
 
             EditorGUI.indentLevel = indent;

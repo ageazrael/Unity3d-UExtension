@@ -10,5 +10,8 @@ namespace UExtension
         public string   IsVisibleControllerValue;
 
         public bool     Readonly = false;
+
+        public string   ChangedCallMethod;
+        public string   ChangedCallTargetMethod;
     }
 }

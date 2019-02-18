@@ -15,7 +15,12 @@ namespace UExtension
             {
                 if (rAttribute.IsSlider)
                 {
+                    EditorGUI.BeginChangeCheck();
                     EditorGUI.IntSlider(position, property, (int)rAttribute.MinValue, (int)rAttribute.MaxValue);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        this.DoChangedCallMethod(property);
+                    }
                 }
                 else
                 {
@@ -24,6 +29,7 @@ namespace UExtension
                     if (EditorGUI.EndChangeCheck())
                     {
                         property.intValue = Mathf.Clamp(newValue, (int)rAttribute.MinValue, (int)rAttribute.MaxValue);
+                        this.DoChangedCallMethod(property);
                     }
                 }
             }
@@ -31,7 +37,12 @@ namespace UExtension
             {
                 if (rAttribute.IsSlider)
                 {
+                    EditorGUI.BeginChangeCheck();
                     EditorGUI.Slider(position, property, rAttribute.MinValue, rAttribute.MaxValue);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        this.DoChangedCallMethod(property);
+                    }
                 }
                 else
                 {
@@ -40,6 +51,7 @@ namespace UExtension
                     if (EditorGUI.EndChangeCheck())
                     {
                         property.floatValue = Mathf.Clamp(newValue, rAttribute.MinValue, rAttribute.MaxValue);
+                        this.DoChangedCallMethod(property);
                     }
                 }
             }
@@ -62,6 +74,7 @@ namespace UExtension
                     if (EditorGUI.EndChangeCheck())
                     {
                         property.vector2Value = sliderValue;
+                        this.DoChangedCallMethod(property);
                     }
                 }
                 else
@@ -73,6 +86,7 @@ namespace UExtension
                         vector2Value.x = Mathf.Clamp(vector2Value.x, rAttribute.MinValue, vector2Value.y);
                         vector2Value.y = Mathf.Clamp(vector2Value.y, vector2Value.x, rAttribute.MaxValue);
                         property.vector2Value = vector2Value;
+                        this.DoChangedCallMethod(property);
                     }
                 }
             }

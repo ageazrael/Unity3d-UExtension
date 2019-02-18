@@ -104,6 +104,8 @@ namespace UExtension
         }
         protected object GetBaseProperty(object rReflectionTarget, string rPropertyPath)
         {
+            if (null == rReflectionTarget)
+                return null;
             // Separate the steps it takes to get to this property
             string[] rSeparatedPaths = rPropertyPath.Split('.');
 
@@ -114,11 +116,17 @@ namespace UExtension
                 if (string.IsNullOrEmpty(rPath) || rPath == "Array")
                     continue;
 
+                if (null == rReflectionTarget)
+                    return null;
+
                 if (typeof(System.Array).IsAssignableFrom(rReflectionTarget.GetType()))
                 {
                     var nStartIndex = rPath.IndexOf('[');
                     var nEndIndex = rPath.LastIndexOf(']');
                     var nDataIndex = int.Parse(rPath.Substring(nStartIndex + 1, nEndIndex - nStartIndex - 1));
+
+                    if (((System.Array)rReflectionTarget).Length <= nDataIndex)
+                        return null;
 
                     rReflectionTarget = ((System.Array)rReflectionTarget).GetValue(nDataIndex);
                 }
@@ -130,6 +138,40 @@ namespace UExtension
                 
             }
             return rReflectionTarget;
+        }
+
+        protected void DoChangedCallMethod(SerializedProperty property)
+        {
+            var rAttribute = this.attribute as InspectorExtensionAttribute;
+            if (!string.IsNullOrEmpty(rAttribute.ChangedCallMethod))
+            {
+                var rTargetObject = this.GetTargetObject(property);
+                var rType = rTargetObject.GetType();
+
+                var rMethodInfo = rType.GetMethod(rAttribute.ChangedCallMethod,
+                    BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+                if (rMethodInfo != null && rMethodInfo.GetParameters().Length == 0)
+                {
+                    if (rMethodInfo.IsStatic)
+                        rMethodInfo.Invoke(null, null);
+                    else
+                        rMethodInfo.Invoke(rTargetObject, null);
+                }
+            }
+            if (!string.IsNullOrEmpty(rAttribute.ChangedCallTargetMethod))
+            {
+                var rType = property.serializedObject.targetObject.GetType();
+
+                var rMethodInfo = rType.GetMethod(rAttribute.ChangedCallMethod,
+                    BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+                if (rMethodInfo != null && rMethodInfo.GetParameters().Length == 0)
+                {
+                    if (rMethodInfo.IsStatic)
+                        rMethodInfo.Invoke(null, null);
+                    else
+                        rMethodInfo.Invoke(property.serializedObject.targetObject, null);
+                }
+            }
         }
     }
 
