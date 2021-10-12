@@ -1,0 +1,9 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/UExtension/Example/Voxel/Resources/BlockTexture.tpsheet
+textureFileNames:
+- Assets/UExtension/Example/Voxel/Resources/BlockTexture.png
+normalmapFileNames:
+- 
+enableDebugOutput: 0

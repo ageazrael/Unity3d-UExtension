@@ -1,0 +1,19 @@
+{
+    "name": "UExtension.NativeEditor",
+    "rootNamespace": "",
+    "references": [
+        "UExtension",
+        "UExtensionEditor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

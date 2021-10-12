@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357036f6430c20c478a917f52bf18b9d, type: 3}
+  m_Name: BlockDataTable
+  m_EditorClassIdentifier: 
+  DataTable:
+  - Id: 0
+    TypeName: UExtension.Voxel.BlockData
+    Data:
+      id: 0
+  - Id: 1
+    TypeName: UExtension.Voxel.BlockSingleData
+    Data:
+      id: 1
+  - Id: 2
+    TypeName: UExtension.Voxel.BlockSideData
+    Data:
+      id: 2
+  Atlas: {fileID: 100100200, guid: 5acd3b50a9615d546ae095a357e374c5, type: 3}
+  AtlasMaterial: {fileID: 2100000, guid: a22d8063a419bb248b35b2ff0b336dbf, type: 2}
+  references:
+    version: 1
+    00000000:
+      type: {class: BlockData, ns: UExtension.Voxel, asm: UExtension.Voxel}
+      data:
+        Id: 0
+    00000001:
+      type: {class: BlockSingleData, ns: UExtension.Voxel, asm: UExtension.Voxel}
+      data:
+        Id: 1
+        All: {fileID: 138228705448348518, guid: 2dbdfad13312e93458e849a15cf9bc82,
+          type: 3}
+    00000002:
+      type: {class: BlockSideData, ns: UExtension.Voxel, asm: UExtension.Voxel}
+      data:
+        Id: 2
+        TopBottom: {fileID: 7188979972826851617, guid: 2dbdfad13312e93458e849a15cf9bc82,
+          type: 3}
+        Side: {fileID: 3893171091882714475, guid: 2dbdfad13312e93458e849a15cf9bc82,
+          type: 3}

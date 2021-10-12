@@ -1,0 +1,16 @@
+{
+    "name": "UExtension.Voxel",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b3963e346e9b36b4d85bde754db649cd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

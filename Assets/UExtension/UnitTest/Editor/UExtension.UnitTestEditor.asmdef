@@ -1,0 +1,20 @@
+{
+    "name": "UExtension.UnitTestEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b3963e346e9b36b4d85bde754db649cd",
+        "GUID:22498132134de014e9fe2bb69b8929e0",
+        "GUID:014411167d105ea48ac847ed4cbd685c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

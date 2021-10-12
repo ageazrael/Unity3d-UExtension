@@ -1,0 +1,20 @@
+{
+    "name": "UExtension.VoxelEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b3963e346e9b36b4d85bde754db649cd",
+        "GUID:22498132134de014e9fe2bb69b8929e0",
+        "GUID:4b74b65dd3587024a8de9ae1eabcf102"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

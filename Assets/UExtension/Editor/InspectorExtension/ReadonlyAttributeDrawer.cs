@@ -6,11 +6,18 @@ namespace UExtension
     [CustomPropertyDrawer(typeof(ReadonlyAttribute))]
     public class ReadonlyAttributeDrawer : PropertyDrawer
     {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label);
+        }
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            var bOldEnabled = GUI.enabled;
             GUI.enabled = false;
-            EditorGUI.PropertyField(position, property);
-            GUI.enabled = true;
+            //EditorGUI.BeginProperty(position, label, property);
+            EditorGUI.PropertyField(position, property, label, true);
+            //EditorGUI.EndProperty();
+            GUI.enabled = bOldEnabled;
         }
     }
 }

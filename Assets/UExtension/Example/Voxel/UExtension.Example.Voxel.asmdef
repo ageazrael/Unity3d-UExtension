@@ -1,0 +1,17 @@
+{
+    "name": "UExtension.Example.Voxel",
+    "rootNamespace": "",
+    "references": [
+        "UExtension",
+        "UExtension.Voxel"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

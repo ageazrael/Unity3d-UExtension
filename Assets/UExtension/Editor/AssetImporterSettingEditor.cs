@@ -21,6 +21,7 @@ namespace UExtension
         protected float mLastRefreshTime;
         private void RefreshSettings()
         {
+			return;
             if (Time.realtimeSinceStartup - this.mLastRefreshTime < 2.0f)
                 return;
             this.mLastRefreshTime = Time.realtimeSinceStartup;
@@ -96,6 +97,7 @@ namespace UExtension
 
         protected void DoPreprocessAsset()
         {
+			return;
             this.RefreshSettings();
             if (this.ImporterSettingPaths.Contains(this.assetPath))
                 return;
